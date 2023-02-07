@@ -5,11 +5,10 @@
  5 * Implements a card class with enum ranks and suits with a cribbage count
  7 * @author Jared Hirt
  8 * Student Number: 230154787
- 9 * @version 1
+ 9 * @version 0.3
  10 */
 package Card;
 
-import java.lang.Math;
 
 public class Card {
 
