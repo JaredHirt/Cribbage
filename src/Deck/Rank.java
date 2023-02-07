@@ -7,7 +7,7 @@
  8 * Student Number: 230154787
  9 * @version 1
  10 */
-package Card;
+package Deck;
 
 public enum Rank {
     Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King ;

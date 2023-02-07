@@ -7,6 +7,6 @@
  8 * Student Number: 230154787
  9 * @version 1
  10 */
-package Card;
+package Deck;
 
 public enum Suit {Club, Diamond, Heart, Spade}
