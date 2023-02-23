@@ -1,6 +1,6 @@
 package Hand;
 
-import Score.Counting;
+import Game.Counting;
 
 public class Crib extends Hand{
     public Crib(){

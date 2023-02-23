@@ -11,7 +11,7 @@ package Hand;
 import Deck.Card;
 
 import java.util.ArrayList;
-import Score.Counting;
+import Game.Counting;
 public class Hand {
     private Card cutCard;
     private ArrayList<Card> hand;
@@ -66,7 +66,7 @@ public class Hand {
         if(Counting.flush(getHand()) > 0 && getHand().get(0).getSuit() == cutCard.getSuit())
             count++;
         count += Counting.knob(getHand(), cutCard);
-        count += Counting.runs(getHand());
+        count += Counting.runs(getHandWithCutCard());
         return count;
     }
 
