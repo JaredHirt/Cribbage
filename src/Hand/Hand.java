@@ -25,7 +25,18 @@ public class Hand {
     public void setHand(ArrayList<Card> newHand){
         hand = newHand;
     }
+
+    /**
+     * Sets the cut card
+     * @param c the card that is cut
+     */
     public void setCutCard(Card c){cutCard = c;}
+
+    /**
+     * Returns the cut card
+     * @return the card that is cut
+     */
+    public Card getCutCard(){return cutCard;}
 
     /**
      * Gets the hand
