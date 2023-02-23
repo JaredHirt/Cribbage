@@ -9,11 +9,53 @@
  10 */
 package Hand;
 import Card.Card;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import Score.Counting;
 public class Hand {
-    private ArrayList<Card> hand;
     private Card cutCard;
-    public Hand(){
-        hand = new ArrayList<Card>();
+    private ArrayList<Card> hand;
+
+
+    /**
+     * Sets the hand to a new hand
+     * @param newHand the new hand you would like the player to have
+     */
+    public void setHand(ArrayList<Card> newHand){
+        hand = newHand;
     }
+
+    /**
+     * Gets the hand
+     */
+    public ArrayList<Card> getHand(){
+        return hand;
+    }
+
+    public ArrayList<Card> getHandWithCutCard(){
+        ArrayList<Card> newHand = new ArrayList<Card>();
+        for(Card i: hand)
+            newHand.add(i);
+        newHand.add(cutCard);
+        return newHand;
+    }
+
+    /**
+     * Gets the point value of the hand
+     * @return Returns the point value of the hand
+     */
+    public int count(){
+        int count = 0;
+        count += Counting.points15(getHandWithCutCard());
+        count += Counting.pointsPair(getHandWithCutCard());
+        count += Counting.flush(getHand());
+        if(Counting.flush(getHand()) > 0 && getHand().get(0).getSuit() == cutCard.getSuit())
+            count++;
+        count += Counting.knob(getHand(), cutCard);
+
+
+
+    }
+
 }
