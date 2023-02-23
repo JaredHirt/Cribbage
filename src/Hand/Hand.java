@@ -8,7 +8,7 @@
  9 * @version 0.1
  10 */
 package Hand;
-import Card.Card;
+import Deck.Card;
 
 import java.util.ArrayList;
 import Score.Counting;

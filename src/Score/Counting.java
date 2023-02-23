@@ -1,8 +1,8 @@
 package Score;
 
-import Card.Card;
-import Card.Rank;
-import Card.Suit;
+import Deck.Card;
+import Deck.Rank;
+import Deck.Suit;
 import java.util.ArrayList;
 
 public class Counting {

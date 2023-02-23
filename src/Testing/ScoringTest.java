@@ -1,8 +1,8 @@
 package Testing;
-import Card.Card;
+import Deck.Card;
 import Hand.Hand;
-import Card.Rank;
-import Card.Suit;
+import Deck.Rank;
+import Deck.Suit;
 
 import java.util.ArrayList;
 
