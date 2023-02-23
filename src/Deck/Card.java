@@ -7,7 +7,9 @@
  8 * Student Number: 230154787
  9 * @version 0.3
  10 */
-package Card;
+package Deck;
+
+
 
 
 public class Card {
@@ -22,7 +24,7 @@ public class Card {
      * @param rank = The rank of the card, a 10 of clubs would be a Ten
      * @param suit = What suit the card is, a 10 of clubs would be a Club
      */
-    public Card(Rank rank, Suit suit){
+    public Card(Deck.Rank rank, Deck.Suit suit){
         this.rank = rank;
         this.suit = suit;
     }
@@ -31,12 +33,12 @@ public class Card {
      * Gets the rank of the card
      * @return the cards rank
      */
-    public Rank getRank(){return rank;}
+    public Deck.Rank getRank(){return rank;}
     /**
      * Gets the suit of the card
      * @return the cards suit
      */
-    public Suit getSuit(){return suit;}
+    public Deck.Suit getSuit(){return suit;}
 
     /**
      * Makes a new card with a specific suit and rank
@@ -58,7 +60,7 @@ public class Card {
      * @param i is a two character string starting with the rank, and then the suit
      */
     public static Card getCard(String i){
-        Rank rank = switch(i.charAt(0)) {
+        Deck.Rank rank = switch(i.charAt(0)) {
             case 'T' -> Rank.Ten;
             case 'J' -> Rank.Jack;
             case 'Q' -> Rank.Queen;
