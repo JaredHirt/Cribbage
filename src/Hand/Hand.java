@@ -25,6 +25,7 @@ public class Hand {
     public void setHand(ArrayList<Card> newHand){
         hand = newHand;
     }
+    public void setCutCard(Card c){cutCard = c;}
 
     /**
      * Gets the hand
@@ -53,9 +54,8 @@ public class Hand {
         if(Counting.flush(getHand()) > 0 && getHand().get(0).getSuit() == cutCard.getSuit())
             count++;
         count += Counting.knob(getHand(), cutCard);
-
-
-
+        count += Counting.runs(getHand());
+        return count;
     }
 
 }

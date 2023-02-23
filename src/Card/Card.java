@@ -63,6 +63,7 @@ public class Card {
             case 'J' -> Rank.Jack;
             case 'Q' -> Rank.Queen;
             case 'K' -> Rank.King;
+            case 'A' -> Rank.Ace;
             default -> Rank.values()[Integer.parseInt(i.substring(0, 1))-1];
         };
         Suit suit = switch(i.charAt(1)) {

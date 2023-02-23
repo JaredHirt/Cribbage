@@ -88,7 +88,7 @@ public class Counting {
                     setCard.add(cards.get(j));
             if(setCard.size() >= 3)
                 for(int j = 1; j < setCard.size(); j++) {
-                    if (setCard.get(j).getRank().ordinal() != setCard.get(j - 1).getRank().ordinal() - 1)
+                    if (setCard.get(j).getRank().ordinal() != setCard.get(j - 1).getRank().ordinal() + 1)
                         break;
                     if(j == cards.size())
                         if(cards.size() == 3)
@@ -96,5 +96,6 @@ public class Counting {
                         else count++;
                 }
         }
+        return count;
     }
 }
