@@ -10,13 +10,14 @@
 package Hand;
 import Card.Card;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import Score.Counting;
 public class Hand {
     private Card cutCard;
     private ArrayList<Card> hand;
-
+    public Hand(){
+        hand = new ArrayList<>();
+    }
 
     /**
      * Sets the hand to a new hand
@@ -46,7 +47,7 @@ public class Hand {
     }
 
     public ArrayList<Card> getHandWithCutCard(){
-        ArrayList<Card> newHand = new ArrayList<Card>();
+        ArrayList<Card> newHand = new ArrayList<>();
         for(Card i: hand)
             newHand.add(i);
         newHand.add(cutCard);

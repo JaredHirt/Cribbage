@@ -3,6 +3,9 @@ package Hand;
 import Score.Counting;
 
 public class Crib extends Hand{
+    public Crib(){
+        super();
+    }
     @Override
     public int count(){
         int count = 0;
