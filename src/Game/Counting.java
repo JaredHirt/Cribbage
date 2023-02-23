@@ -95,8 +95,9 @@ public class Counting {
                     if(j == (setCard.size()-1))
                         if(setCard.size() == 3) {
                             count += 3;
+                        } else if (setCard.size() == 4) {
+                            count -= 2;
                         }
-                        else count++;
                 }
         }
         return count;

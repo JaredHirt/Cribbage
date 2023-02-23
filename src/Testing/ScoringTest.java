@@ -15,6 +15,8 @@ public class ScoringTest {
         Card[] test2Hand = {Card.getCard("4S"), Card.getCard("5C"), Card.getCard("5D"), Card.getCard("4C")};
         System.out.println(checkScore(getArrayOfCards(test2Hand), Card.getCard("6C"), 24));
 
+        Card [] test3Hand = {Card.getCard("AS"), Card.getCard("2C"), Card.getCard("3D"), Card.getCard("4C")};
+        System.out.println(checkScore(getArrayOfCards(test3Hand), Card.getCard("5C"), 7));
 
 
 
