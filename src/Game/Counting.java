@@ -2,6 +2,7 @@ package Game;
 
 import Deck.Card;
 import Deck.Rank;
+import java.util.Collections;
 
 import java.util.ArrayList;
 
@@ -86,13 +87,15 @@ public class Counting {
             for(int j = 0; j < set.length(); j++)
                 if(set.charAt(j) == '1')
                     setCard.add(cards.get(j));
+            Collections.sort(setCard);
             if(setCard.size() >= 3)
                 for(int j = 1; j < setCard.size(); j++) {
                     if (setCard.get(j).getRank().ordinal() != setCard.get(j - 1).getRank().ordinal() + 1)
                         break;
-                    if(j+1 == cards.size())
-                        if(cards.size() == 3)
+                    if(j == (setCard.size()-1))
+                        if(setCard.size() == 3) {
                             count += 3;
+                        }
                         else count++;
                 }
         }

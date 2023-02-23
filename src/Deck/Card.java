@@ -11,7 +11,7 @@ package Deck;
 
 
 
-public class Card {
+public class Card implements Comparable<Card>{
 
     private final Rank rank;
     private final Suit suit;
@@ -111,4 +111,18 @@ public class Card {
      * @return is the card in use
      */
     public boolean inUse(){return inUse;}
+
+
+    /**
+     * Compares a card to see if the rank is higher
+     * @param a the card you want to compare to
+     * @return returns a 1 if the original card is higher, a 0 if they are equal, and a -1 if the original card rank is lower
+     */
+    @Override
+    public int compareTo(Card a){
+        return Integer.compare(this.rank.ordinal(), a.rank.ordinal());
+    }
+
+
+
 }
