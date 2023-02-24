@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class ScoringTest {
     public static void main(String[] args) {
 
+
         Card[] test1Hand = {Card.getCard("5S"), Card.getCard("5D"), Card.getCard("5C"), Card.getCard("JH")};
         System.out.println(checkScore(getArrayOfCards(test1Hand), Card.getCard("5H"), 29));
 

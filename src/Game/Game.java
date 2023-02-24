@@ -5,8 +5,14 @@ package Game;
  */
 import Deck.Deck;
 import Deck.Card;
+import Deck.Rank;
 import Player.Player;
 import Player.AI;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Game {
     public static void main(String[] args) {
         //Setting up the game
@@ -14,21 +20,22 @@ public class Game {
         Player player = new Player();
         AI ai = new AI();
 
-        Player pone;
-        Player dealer;
+        Player pone = null;
+        Player dealer = null;
+        Player swap = null;
 
         //Finding out who the dealer is
         //Need to make a GUI for this action
         boolean dealerFound = false;
-        Card[] cardsForDealer;
+        Card[] dealtCards;
         while(!dealerFound){
-            cardsForDealer = theDeck.returnUniqueCards(2);
-            if(cardsForDealer[0].getRank().ordinal() < cardsForDealer[1].getRank().ordinal()) {
+            dealtCards = theDeck.returnUniqueCards(2);
+            if(dealtCards[0].getRank().ordinal() < dealtCards[1].getRank().ordinal()) {
                 dealerFound = true;
                 dealer = player;
                 pone = ai;
             }
-            if(cardsForDealer[0].getRank().ordinal() > cardsForDealer[1].getRank().ordinal()){
+            if(dealtCards[0].getRank().ordinal() > dealtCards[1].getRank().ordinal()){
                 dealerFound = true;
                 dealer = ai;
                 pone = player;
@@ -36,8 +43,49 @@ public class Game {
         }
 
         //Game is now setup, now play can begin
-        //while(true) is temporary, replace it later down to make the code more readable.
-        while(true){}
+        //while(true) is temporary, it represents a round, replace it later down to make the code more readable
+        while(true){
+            dealer.newRound();
+            pone.newRound();
+            //Dealing the cards 1-6 is for the dealer, 7-12 is for the pone, 13 is the cut card which is not revealed to the players yet
+            dealtCards = theDeck.returnUniqueCards(13);
+            //This monstrosity of code is getting the first 6 numbers of dealtCards and passing it to the setHand method
+            dealer.setHand(new ArrayList<Card>(Arrays.asList(Arrays.copyOfRange(dealtCards, 0, 5))));
+            pone.setHand(new ArrayList<Card>(Arrays.asList(Arrays.copyOfRange(dealtCards, 6, 11))));
+
+            dealer.setCutCard(dealtCards[12]);
+            pone.setCutCard(dealtCards[12]);
+
+            //The cards are now all dealt
+
+            //dealer.discard()
+            //pone.discard()
+            //Make sure to set the pegging hand with the discard method
+
+            //Reveal cut card in the GUI, if it is a jack then give the dealer 2 points for "his knees"
+            if(dealtCards[12].getRank() == Rank.Jack)
+                dealer.increaseScore(2);
+
+
+            //Code for pegging
+            /*
+            while(dealer.howManyCardsInHand + pone.howManyCardsInHand > 0)
+                if(pone.canPlayCard())
+                    pone.playCard();
+                if(dealer.canPlayCard())
+                    dealer.playCard();
+             */
+
+            //Counting the score of the hands
+            pone.countHand();
+            dealer.countHand();
+            dealer.countCrib();
+
+            //Switching the dealer and the pone for the next round
+            swap = dealer;
+            dealer = pone;
+            pone = swap;
+        }
 
     }
 }
