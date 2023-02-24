@@ -2,6 +2,8 @@ package Player;
 import Hand.Hand;
 import Hand.Crib;
 import Deck.Card;
+import Deck.Deck;
+import java.util.Scanner;
 
 import java.util.ArrayList;
 
@@ -11,6 +13,7 @@ public class Player {
     private Hand myHand;
     private ArrayList<Card> peggingCards;
     public static Crib theCrib = new Crib();
+    private Scanner kbd = new Scanner(System.in);
 
     /**
      * Player constructor
@@ -77,6 +80,18 @@ public class Player {
      */
     public void countHand(){increaseScore(myHand.count());}
 
+    /**
+     * Counts the crib
+     */
     public void countCrib(){increaseScore(theCrib.count());}
+
+    public void discard(){
+        System.out.print("\nCards in hand: ");
+        for(Card i: myHand.getHand())
+            System.out.print(i + " ");
+        System.out.println("Please enter which card you would like to remove");
+        myHand.getHand().remove()
+
+    }
 
 }
