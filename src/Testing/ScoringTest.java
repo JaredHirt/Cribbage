@@ -1,10 +1,10 @@
 package Testing;
 import Deck.Card;
 import Hand.Hand;
-import Deck.Rank;
-import Deck.Suit;
+
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ScoringTest {
     public static void main(String[] args) {
@@ -18,6 +18,12 @@ public class ScoringTest {
         Card [] test3Hand = {Card.getCard("AS"), Card.getCard("2C"), Card.getCard("3D"), Card.getCard("4C")};
         System.out.println(checkScore(getArrayOfCards(test3Hand), Card.getCard("5C"), 7));
 
+        Card [] test4Hand = {Card.getCard("5S"), Card.getCard("5C"), Card.getCard("5D"), Card.getCard("5H")};
+        System.out.println(checkScore(getArrayOfCards(test4Hand), Card.getCard("JC"), 28));
+
+        Card [] test5Hand = {Card.getCard("7S"), Card.getCard("7C"), Card.getCard("8D"), Card.getCard("8H")};
+        System.out.println(checkScore(getArrayOfCards(test5Hand), Card.getCard("9C"), 24));
+
 
 
     }
@@ -29,9 +35,6 @@ public class ScoringTest {
         return testHand.count() == expectedScore;
     }
     public static ArrayList<Card> getArrayOfCards(Card[] cards){
-        ArrayList<Card> newArray = new ArrayList<Card>();
-        for(Card i: cards)
-            newArray.add(i);
-        return newArray;
+        return new ArrayList<>(Arrays.asList(cards));
     }
 }

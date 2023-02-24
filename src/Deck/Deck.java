@@ -10,4 +10,11 @@ public class Deck {
             theCards.add(Card.getCard(i));
     }
 
+    /**
+     * Returns a set amount of unique cards
+     */
+    public Card[] returnUniqueCards(){
+
+    }
+
 }
