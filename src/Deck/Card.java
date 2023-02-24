@@ -9,7 +9,9 @@
  10 */
 package Deck;
 
-
+/**
+ * This is a github test. You should be able to see this javadoc.
+ */
 
 public class Card implements Comparable<Card>{
 
