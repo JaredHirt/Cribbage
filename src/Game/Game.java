@@ -24,6 +24,8 @@ public class Game {
         Player dealer = null;
         Player swap;
 
+        ArrayList<Card> cardsPegged = new ArrayList<>();
+
         //Finding out who the dealer is
         //Need to make a GUI for this action
         boolean dealerFound = false;
@@ -51,6 +53,8 @@ public class Game {
             else System.out.println("Player is the Dealer");
             dealer.newRound();
             pone.newRound();
+            cardsPegged.clear();
+
             //Dealing the cards 1-6 is for the dealer, 7-12 is for the pone, 13 is the cut card which is not revealed to the players yet
             dealtCards = theDeck.returnUniqueCards(13);
             //This monstrosity of code is getting the first 6 numbers of dealtCards and passing it to the setHand method
@@ -72,13 +76,13 @@ public class Game {
 
 
             //Code for pegging
-            /*
-            while(dealer.howManyCardsInHand + pone.howManyCardsInHand > 0)
-                if(pone.canPlayCard())
-                    pone.playCard();
-                if(dealer.canPlayCard())
-                    dealer.playCard();
-             */
+
+            while(dealer.howManyCardsInHand() + pone.howManyCardsInHand() > 0) {
+                if (pone.canPlayCard(cardsPegged))
+                    pone.playCard(cardsPegged);
+                if (dealer.canPlayCard(cardsPegged))
+                    dealer.playCard(cardsPegged);
+            }
 
             //Counting the score of the hands
             pone.countHand();

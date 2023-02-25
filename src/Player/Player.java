@@ -43,14 +43,20 @@ public class Player {
 
     /**
      * Checks if you have a low enough card to peg
-     * @param highestPossibleCard the highest possible card to play
+     * @param cardsPegged the arraylist of cards pegged
      * @return if there is a card you can play
      */
-    public boolean canPlayCard(int highestPossibleCard){
+    public boolean canPlayCard(ArrayList<Card> cardsPegged){
         if(howManyCardsInHand() == 0)
             return false;
+        if(cardsPegged.size() == 0)
+            return true;
+        int peggingScore = 0;
+        for(Card i:cardsPegged)
+            peggingScore += i.getCribCount();
+
         for(Card i:peggingCards)
-            if(i.getRank().count() <= highestPossibleCard)
+            if(i.getRank().count() <= peggingScore)
                 return true;
         return false;
 
@@ -116,6 +122,35 @@ public class Player {
     }
     public int getScore(){
         return score;
+    }
+
+    /**
+     * Pegs a card
+     * @param peggedCards the cards that have been pegged in this session
+     */
+    public void playCard(ArrayList<Card> peggedCards){
+        String stringCardToPeg;
+        Card cardToPeg = null;
+        while(cardToPeg == null) {
+            System.out.print("\nPegged Cards: ");
+            for (Card i : peggedCards)
+                System.out.print(i + " ");
+
+            System.out.print("\nCards you can use to peg: ");
+            for (Card i : peggingCards)
+                System.out.print(i + " ");
+
+            System.out.println("\nWhat card would you like to peg with?");
+            stringCardToPeg = kbd.next();
+            for (Card i : peggingCards)
+                if (i.toString().equalsIgnoreCase(stringCardToPeg))
+                    cardToPeg = i;
+            if (cardToPeg != null) {
+                peggingCards.remove(cardToPeg);
+                peggedCards.add(cardToPeg);
+            }
+        }
+
     }
 
 }
