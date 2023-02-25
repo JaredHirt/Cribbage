@@ -17,13 +17,13 @@ public class Counting {
     public static int points15(ArrayList<Card> cards){
         int count = 0;
         int setCount;
-        String set;
+        StringBuilder set;
         for(int i=0; i < Math.pow(2, cards.size()); i++){
             setCount = 0;
-            set = Integer.toBinaryString(i);
+            set = new StringBuilder(Integer.toBinaryString(i));
             //Makes the binary number the length of the amount of cards by padding it with 0's
             while(set.length() < cards.size())
-                set = "0" + set;
+                set.insert(0, "0");
             for(int j = 0; j < cards.size(); j++)
                 if(set.charAt(j) == '1')
                     setCount += cards.get(j).getCribCount();
@@ -75,14 +75,14 @@ public class Counting {
     }
     public static int runs(ArrayList<Card> cards){
         int count = 0;
-        String set;
-        ArrayList<Card> setCard = new ArrayList<Card>();
+        StringBuilder set;
+        ArrayList<Card> setCard = new ArrayList<>();
         for(int i=0; i < Math.pow(2, cards.size()); i++){
             setCard.clear();
-            set = Integer.toBinaryString(i);
+            set = new StringBuilder(Integer.toBinaryString(i));
             //Makes the binary number the length of the amount of cards by padding it with 0's
             while(set.length() < cards.size())
-                set = "0" + set;
+                set.insert(0, "0");
             //Gets the subset of card
             for(int j = 0; j < set.length(); j++)
                 if(set.charAt(j) == '1')
@@ -148,9 +148,9 @@ public class Counting {
         int highestRun = 0;
         if(peggedCards.size() < 3)
             return highestRun;
-        ArrayList<Card> peggedCardsEditable = new ArrayList<Card>(peggedCards);
+        ArrayList<Card> peggedCardsEditable;
         for(int i = peggedCards.size()-3; i >= 0; i--) {
-            peggedCardsEditable = new ArrayList<Card>(peggedCards.subList(i, peggedCards.size()));
+            peggedCardsEditable = new ArrayList<>(peggedCards.subList(i, peggedCards.size()));
             peggedCardsEditable.sort((Card c1, Card c2) -> c1.getRank().compareTo(c2.getRank()) );
             for (int j = 1; j < peggedCardsEditable.size(); j++) {
                 if (peggedCardsEditable.get(j).getRank().ordinal() != peggedCardsEditable.get(j - 1).getRank().ordinal() + 1)
