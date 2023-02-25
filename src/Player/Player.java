@@ -161,7 +161,6 @@ public class Player {
                 peggingCards.remove(cardToPeg);
                 peggedCards.add(cardToPeg);
             }
-            cardToPeg = null;
         }
     }
 }
