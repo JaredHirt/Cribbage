@@ -145,7 +145,21 @@ public class Counting {
     }
 
     public static int pointsRunsPegging(ArrayList<Card> peggedCards){
-        return 0;
+        int highestRun = 0;
+        if(peggedCards.size() < 3)
+            return highestRun;
+        ArrayList<Card> peggedCardsEditable = new ArrayList<Card>(peggedCards);
+        for(int i = peggedCards.size()-3; i >= 0; i--) {
+            peggedCardsEditable = new ArrayList<Card>(peggedCards.subList(i, peggedCards.size()));
+            peggedCardsEditable.sort((Card c1, Card c2) -> c1.getRank().compareTo(c2.getRank()) );
+            for (int j = 1; j < peggedCardsEditable.size(); j++) {
+                if (peggedCardsEditable.get(j).getRank().ordinal() != peggedCardsEditable.get(j - 1).getRank().ordinal() + 1)
+                    break;
+                if (j == (peggedCardsEditable.size() - 1))
+                    highestRun = peggedCardsEditable.size();
+            }
+        }
+        return highestRun;
     }
 
 
