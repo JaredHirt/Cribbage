@@ -45,6 +45,10 @@ public class Game {
         //Game is now setup, now play can begin
         //while(true) is temporary, it represents a round, replace it later down to make the code more readable
         while(true){
+            System.out.println("\n\n\n\nBEGINNING OF NEW ROUND");
+            if(dealer instanceof AI)
+                System.out.println("Player is the Pone");
+            else System.out.println("Player is the Dealer");
             dealer.newRound();
             pone.newRound();
             //Dealing the cards 1-6 is for the dealer, 7-12 is for the pone, 13 is the cut card which is not revealed to the players yet
@@ -59,7 +63,7 @@ public class Game {
             //The cards are now all dealt
 
             dealer.discard();
-            //pone.discard()
+            pone.discard();
             //Make sure to set the pegging hand with the discard method
 
             //Reveal cut card in the GUI, if it is a jack then give the dealer 2 points for "his knees"

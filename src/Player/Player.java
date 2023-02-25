@@ -2,8 +2,8 @@ package Player;
 import Hand.Hand;
 import Hand.Crib;
 import Deck.Card;
-import Deck.Deck;
 import java.util.Scanner;
+import java.util.Arrays;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,10 @@ public class Player {
      * Sets the cut card
      * @param c the card which has been cut
      */
-    public void setCutCard(Card c){myHand.setCutCard(c);}
+    public void setCutCard(Card c){
+        myHand.setCutCard(c);
+        theCrib.setCutCard(c);
+    }
 
     /**
      * Gives how many cards in hand
@@ -62,6 +65,7 @@ public class Player {
      */
     public void increaseScore(int scoreIncrease){
         score+=scoreIncrease;
+        System.out.println("The Score of the player is " + score);
         //GUI STUFF RIGHT HERE
         //CHECK IF YOU WIN BY GETTING THESE POINTS
     }
@@ -70,9 +74,9 @@ public class Player {
      * Sets up the player for the new round
      */
     public void newRound(){
-        myHand.setHand(new ArrayList<>());
+        myHand.getHand().clear();
         myHand.setCutCard(null);
-        theCrib.setHand(new ArrayList<>());
+        theCrib.getHand().clear();
     }
 
     /**
@@ -86,12 +90,31 @@ public class Player {
     public void countCrib(){increaseScore(theCrib.count());}
 
     public void discard(){
-        System.out.print("\nCards in hand: ");
-        for(Card i: myHand.getHand())
-            System.out.print(i + " ");
-        System.out.println("Please enter which card you would like to remove");
-        myHand.getHand().remove()
+        String cardStringToRemove = null;
+        Card cardToRemove = null;
 
+        while(myHand.getHand().size() > 4) {
+            System.out.print("\nCards in hand: ");
+            for(Card i: myHand.getHand())
+                System.out.print(i + " ");
+            System.out.println("\nPlease enter which card you would like to remove");
+            cardStringToRemove = kbd.next();
+            for(Card i: myHand.getHand())
+                if(i.toString().equalsIgnoreCase(cardStringToRemove))
+                    cardToRemove = i;
+            theCrib.getHand().add(cardToRemove);
+            myHand.getHand().remove(cardToRemove);
+            cardToRemove = null;
+
+        }
+        peggingCards = new ArrayList<>(myHand.getHand());
+    }
+
+    public void setScore(int newScore){
+        score = newScore;
+    }
+    public int getScore(){
+        return score;
     }
 
 }

@@ -67,6 +67,12 @@ public class Hand {
             count++;
         count += Counting.knob(getHand(), cutCard);
         count += Counting.runs(getHandWithCutCard());
+
+        System.out.print("\nThe Hand of ");
+        for(Card i: getHand())
+            System.out.print(i+ " ");
+
+        System.out.println("with a cut card of " + getCutCard() + " scored " + count + " points");
         return count;
     }
 

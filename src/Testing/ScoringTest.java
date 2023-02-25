@@ -1,6 +1,7 @@
 package Testing;
 import Deck.Card;
 import Hand.Hand;
+import Hand.Crib;
 
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class ScoringTest {
         Card [] test5Hand = {Card.getCard("7S"), Card.getCard("7C"), Card.getCard("8D"), Card.getCard("8H")};
         System.out.println(checkScore(getArrayOfCards(test5Hand), Card.getCard("9C"), 24));
 
+        Card[] test6Hand = {Card.getCard("5S"), Card.getCard("5D"), Card.getCard("5C"), Card.getCard("JH")};
+        System.out.println(checkScoreCrib(getArrayOfCards(test6Hand), Card.getCard("5H"), 29));
+
 
 
     }
@@ -35,6 +39,16 @@ public class ScoringTest {
         System.out.println(testHand.count());
         return testHand.count() == expectedScore;
     }
+
+    public static boolean checkScoreCrib(ArrayList<Card> cards, Card cutCard, int expectedScore){
+        Crib testHand = new Crib();
+        testHand.setHand(cards);
+        testHand.setCutCard(cutCard);
+        System.out.println(testHand.count());
+        return testHand.count() == expectedScore;
+    }
+
+
     public static ArrayList<Card> getArrayOfCards(Card[] cards){
         return new ArrayList<>(Arrays.asList(cards));
     }

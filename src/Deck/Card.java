@@ -85,6 +85,7 @@ public class Card implements Comparable<Card>{
      */
     public String toString(){
         String card = switch (getRank()) {
+            case Ace -> "A";
             case Ten -> "T";
             case Jack -> "J";
             case Queen -> "Q";
