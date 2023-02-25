@@ -104,6 +104,8 @@ public class Counting {
     }
 
     public static int pointsPegging(ArrayList<Card> peggedCards){
+        if(peggedCards.size() == 1)
+            return 0;
         return points15Pegging(peggedCards) + points31Pegging(peggedCards) + pointsPairsPegging(peggedCards) + pointsRunsPegging(peggedCards);
     }
 
@@ -126,7 +128,20 @@ public class Counting {
     }
 
     public static int pointsPairsPegging(ArrayList<Card> peggedCards){
-        return 0;
+        int count = 0;
+        if(peggedCards.size() < 2)
+            return count;
+        if(peggedCards.get(peggedCards.size()-1).getRank() == peggedCards.get(peggedCards.size()-2).getRank())
+            count = 2;
+        if(peggedCards.size() < 3)
+            return count;
+        if((peggedCards.get(peggedCards.size()-1).getRank() == peggedCards.get(peggedCards.size()-2).getRank()) && (peggedCards.get(peggedCards.size()-1).getRank() == peggedCards.get(peggedCards.size()-3).getRank()))
+            count = 6;
+        if(peggedCards.size() < 4)
+            return count;
+        if((peggedCards.get(peggedCards.size()-1).getRank() == peggedCards.get(peggedCards.size()-2).getRank()) && (peggedCards.get(peggedCards.size()-1).getRank() == peggedCards.get(peggedCards.size()-3).getRank()) && peggedCards.get(peggedCards.size()-1) == peggedCards.get(peggedCards.size()-4))
+            count = 12;
+        return count;
     }
 
     public static int pointsRunsPegging(ArrayList<Card> peggedCards){
