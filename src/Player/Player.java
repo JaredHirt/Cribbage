@@ -118,8 +118,10 @@ public class Player {
             for(Card i: myHand.getHand())
                 if(i.toString().equalsIgnoreCase(cardStringToRemove))
                     cardToRemove = i;
-            theCrib.getHand().add(cardToRemove);
-            myHand.getHand().remove(cardToRemove);
+            if(cardToRemove != null) {
+                theCrib.getHand().add(cardToRemove);
+                myHand.getHand().remove(cardToRemove);
+            }
             cardToRemove = null;
 
         }
