@@ -30,8 +30,8 @@ public class AI extends Player{
     /**
      * Automated AI discard method
      */
-    @Override
-    public void discard(){
+
+    public void randomDiscard(){
         ArrayList<Card> cardsInHand = getHand().getHand();
         Crib theCrib = getTheCrib();
         theCrib.getHand().add(cardsInHand.get(0));
@@ -59,7 +59,8 @@ public class AI extends Player{
 
     }
 
-    public void optimalDiscard(){
+    @Override
+    public void discard(){
         ArrayList<Card> hand = getHand().getHand();
         ArrayList<Card> subsetOfHand;
         ArrayList<ArrayList<Card>> possibleDiscards = new ArrayList<>();
@@ -85,7 +86,6 @@ public class AI extends Player{
         }
 
         setPeggingCards(new ArrayList<Card>(hand));
-
     }
 
     private static int countOfAllPossibleCutCards(ArrayList<Card> subset, ArrayList<Card> hand){
