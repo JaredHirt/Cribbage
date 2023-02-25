@@ -19,6 +19,11 @@ public class AI extends Player{
         //GUI STUFF RIGHT HERE
     }
 
+    //Please optimize this eventually
+
+    /**
+     * Automated AI discard method
+     */
     @Override
     public void discard(){
         ArrayList<Card> cardsInHand = getHand().getHand();
@@ -28,5 +33,23 @@ public class AI extends Player{
         theCrib.getHand().add(cardsInHand.get(0));
         cardsInHand.remove(0);
         setPeggingCards(new ArrayList<>(cardsInHand));
+    }
+
+    @Override
+    public void playCard(ArrayList<Card> peggedCards){
+        Card cardToPeg = null;
+        ArrayList<Card> peggingCards = getPeggingCards();
+        for(Card i: peggingCards)
+            if(super.canPlayCard(peggedCards, i)) {
+                cardToPeg = i;
+            }
+        peggedCards.add(cardToPeg);
+        getPeggingCards().remove(cardToPeg);
+
+        System.out.print("\nPegged Cards: ");
+            for (Card i : peggedCards)
+                System.out.print(i + " ");
+        System.out.println();
+
     }
 }
