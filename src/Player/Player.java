@@ -10,7 +10,7 @@ public class Player {
     private int score;
     private final Hand myHand;
     private ArrayList<Card> peggingCards;
-    public static Crib theCrib = new Crib();
+    public static final Crib theCrib = new Crib();
     private final Scanner kbd = new Scanner(System.in);
 
     /**

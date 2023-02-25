@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    ArrayList<Card> theCards;
+    final ArrayList<Card> theCards;
 
 
     public Deck(){
