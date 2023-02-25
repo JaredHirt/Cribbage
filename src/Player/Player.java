@@ -68,6 +68,8 @@ public class Player {
      * Also updates the GUI and checks if there is a win
      */
     public void increaseScore(int scoreIncrease){
+        if(scoreIncrease == 0)
+            return;
         score+=scoreIncrease;
         System.out.println("The Score of the player is " + score);
         if(getScore() > 120) {
@@ -150,7 +152,5 @@ public class Player {
                 peggedCards.add(cardToPeg);
             }
         }
-
     }
-
 }

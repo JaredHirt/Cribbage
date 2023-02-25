@@ -6,6 +6,8 @@ public class AI extends Player{
     }
     @Override
         public void increaseScore(int scoreIncrease){
+        if(scoreIncrease == 0)
+            return;
         setScore(getScore()+scoreIncrease);
         System.out.println("The Score of the AI is " + getScore());
         if(getScore() > 120) {

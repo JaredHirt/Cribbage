@@ -8,6 +8,7 @@ import Deck.Card;
 import Deck.Rank;
 import Player.Player;
 import Player.AI;
+import Game.Counting;
 
 
 import java.util.ArrayList;
@@ -78,8 +79,10 @@ public class Game {
             //Code for pegging
 
             while(dealer.howManyCardsInHand() + pone.howManyCardsInHand() > 0) {
+                //Pone Pegging
                 if (pone.canPlayCard(cardsPegged)) {
                     pone.playCard(cardsPegged);
+                    pone.increaseScore(Counting.pointsPegging(cardsPegged));
                     if(!(pone.canPlayCard(cardsPegged) || dealer.canPlayCard(cardsPegged))) {
                         pone.increaseScore(1);
                         cardsPegged.clear();
@@ -88,9 +91,10 @@ public class Game {
 
 
 
-
+                //Dealer Pegging
                 if (dealer.canPlayCard(cardsPegged)) {
                     dealer.playCard(cardsPegged);
+                    dealer.increaseScore(Counting.pointsPegging(cardsPegged));
                     if(!(pone.canPlayCard(cardsPegged) || dealer.canPlayCard(cardsPegged))) {
                         dealer.increaseScore(1);
                         cardsPegged.clear();

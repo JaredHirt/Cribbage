@@ -102,4 +102,36 @@ public class Counting {
         }
         return count;
     }
+
+    public static int pointsPegging(ArrayList<Card> peggedCards){
+        return points15Pegging(peggedCards) + points31Pegging(peggedCards) + pointsPairsPegging(peggedCards) + pointsRunsPegging(peggedCards);
+    }
+
+    public static int points15Pegging(ArrayList<Card> peggedCards){
+        int count = 0;
+        for(Card i: peggedCards)
+            count += i.getRank().count();
+        if(count==15)
+            return 2;
+        return 0;
+    }
+
+    public static int points31Pegging(ArrayList<Card> peggedCards){
+        int count = 0;
+        for(Card i: peggedCards)
+            count += i.getRank().count();
+        if(count==31)
+            return 1;
+        return 0;
+    }
+
+    public static int pointsPairsPegging(ArrayList<Card> peggedCards){
+        return 0;
+    }
+
+    public static int pointsRunsPegging(ArrayList<Card> peggedCards){
+        return 0;
+    }
+
+
 }
