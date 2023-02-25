@@ -14,7 +14,6 @@ public class Card implements Comparable<Card>{
     private final Rank rank;
     private final Suit suit;
 
-    private boolean inUse;
 
     /**
      * Constructor creating a card class using enums
@@ -99,17 +98,7 @@ public class Card implements Comparable<Card>{
      */
     public int getCribCount(){return rank.count();}
 
-    /**
-     * Changes the private member variable "inUse" to either true or false
-     * @param bool the state you want the card to be in
-     */
-    public void setInUse(boolean bool){inUse = bool;}
 
-    /**
-     * Returns if the card is in use
-     * @return is the card in use
-     */
-    public boolean inUse(){return inUse;}
 
 
     /**
