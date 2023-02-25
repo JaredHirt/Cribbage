@@ -62,6 +62,13 @@ public class Player {
 
     }
 
+    public boolean canPlayCard(ArrayList<Card> cardsPegged, Card cardYouWantToPeg){
+        int peggingScore = 0;
+        for(Card i:cardsPegged)
+            peggingScore += i.getCribCount();
+        return (peggingScore + cardYouWantToPeg.getCribCount() <= 31);
+    }
+
     /**
      * Increases the score by an amount that is passed
      * @param scoreIncrease the amount to increase the score by
@@ -146,7 +153,8 @@ public class Player {
             stringCardToPeg = kbd.next();
             for (Card i : peggingCards)
                 if (i.toString().equalsIgnoreCase(stringCardToPeg))
-                    cardToPeg = i;
+                    if(canPlayCard(peggedCards, i))
+                        cardToPeg = i;
             if (cardToPeg != null) {
                 peggingCards.remove(cardToPeg);
                 peggedCards.add(cardToPeg);
