@@ -151,7 +151,7 @@ public class Counting {
         ArrayList<Card> peggedCardsEditable;
         for(int i = peggedCards.size()-3; i >= 0; i--) {
             peggedCardsEditable = new ArrayList<>(peggedCards.subList(i, peggedCards.size()));
-            peggedCardsEditable.sort((Card c1, Card c2) -> c1.getRank().compareTo(c2.getRank()) );
+            Collections.sort(peggedCardsEditable);
             for (int j = 1; j < peggedCardsEditable.size(); j++) {
                 if (peggedCardsEditable.get(j).getRank().ordinal() != peggedCardsEditable.get(j - 1).getRank().ordinal() + 1)
                     break;
