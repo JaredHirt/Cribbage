@@ -56,7 +56,7 @@ public class Player {
             peggingScore += i.getCribCount();
 
         for(Card i:peggingCards)
-            if(i.getRank().count() <= peggingScore)
+            if(i.getRank().count() <= 31 - peggingScore)
                 return true;
         return false;
 

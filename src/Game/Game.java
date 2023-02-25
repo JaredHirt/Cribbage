@@ -78,10 +78,24 @@ public class Game {
             //Code for pegging
 
             while(dealer.howManyCardsInHand() + pone.howManyCardsInHand() > 0) {
-                if (pone.canPlayCard(cardsPegged))
+                if (pone.canPlayCard(cardsPegged)) {
                     pone.playCard(cardsPegged);
-                if (dealer.canPlayCard(cardsPegged))
+                    if(!(pone.canPlayCard(cardsPegged) || dealer.canPlayCard(cardsPegged))) {
+                        pone.increaseScore(1);
+                        cardsPegged.clear();
+                    }
+                }
+
+
+
+
+                if (dealer.canPlayCard(cardsPegged)) {
                     dealer.playCard(cardsPegged);
+                    if(!(pone.canPlayCard(cardsPegged) || dealer.canPlayCard(cardsPegged))) {
+                        dealer.increaseScore(1);
+                        cardsPegged.clear();
+                    }
+                }
             }
 
             //Counting the score of the hands
