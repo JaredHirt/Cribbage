@@ -47,9 +47,7 @@ public class Hand {
     }
 
     public ArrayList<Card> getHandWithCutCard(){
-        ArrayList<Card> newHand = new ArrayList<>();
-        for(Card i: hand)
-            newHand.add(i);
+        ArrayList<Card> newHand = new ArrayList<>(hand);
         newHand.add(cutCard);
         return newHand;
     }

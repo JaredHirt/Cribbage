@@ -3,17 +3,15 @@ import Hand.Hand;
 import Hand.Crib;
 import Deck.Card;
 import java.util.Scanner;
-import java.util.Arrays;
 
 import java.util.ArrayList;
 
 public class Player {
     private int score;
-    private boolean dealer;
-    private Hand myHand;
+    private final Hand myHand;
     private ArrayList<Card> peggingCards;
     public static Crib theCrib = new Crib();
-    private Scanner kbd = new Scanner(System.in);
+    private final Scanner kbd = new Scanner(System.in);
 
     /**
      * Player constructor
@@ -66,8 +64,11 @@ public class Player {
     public void increaseScore(int scoreIncrease){
         score+=scoreIncrease;
         System.out.println("The Score of the player is " + score);
+        if(getScore() > 120) {
+            System.out.println("THE PLAYER HAS WON THE GAME");
+            System.exit(1);
+        }
         //GUI STUFF RIGHT HERE
-        //CHECK IF YOU WIN BY GETTING THESE POINTS
     }
 
     /**
@@ -90,7 +91,7 @@ public class Player {
     public void countCrib(){increaseScore(theCrib.count());}
 
     public void discard(){
-        String cardStringToRemove = null;
+        String cardStringToRemove;
         Card cardToRemove = null;
 
         while(myHand.getHand().size() > 4) {

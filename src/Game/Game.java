@@ -22,7 +22,7 @@ public class Game {
 
         Player pone = null;
         Player dealer = null;
-        Player swap = null;
+        Player swap;
 
         //Finding out who the dealer is
         //Need to make a GUI for this action
@@ -54,8 +54,8 @@ public class Game {
             //Dealing the cards 1-6 is for the dealer, 7-12 is for the pone, 13 is the cut card which is not revealed to the players yet
             dealtCards = theDeck.returnUniqueCards(13);
             //This monstrosity of code is getting the first 6 numbers of dealtCards and passing it to the setHand method
-            dealer.setHand(new ArrayList<Card>(Arrays.asList(Arrays.copyOfRange(dealtCards, 0, 6))));
-            pone.setHand(new ArrayList<Card>(Arrays.asList(Arrays.copyOfRange(dealtCards, 6, 12))));
+            dealer.setHand(new ArrayList<>(Arrays.asList(Arrays.copyOfRange(dealtCards, 0, 6))));
+            pone.setHand(new ArrayList<>(Arrays.asList(Arrays.copyOfRange(dealtCards, 6, 12))));
 
             dealer.setCutCard(dealtCards[12]);
             pone.setCutCard(dealtCards[12]);
