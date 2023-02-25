@@ -1,5 +1,7 @@
 package Player;
-
+import Deck.Card;
+import java.util.ArrayList;
+import Hand.Crib;
 public class AI extends Player{
     public AI(){
         super();
@@ -15,6 +17,16 @@ public class AI extends Player{
             System.exit(1);
         }
         //GUI STUFF RIGHT HERE
-        //CHECK IF YOU WIN BY GETTING THESE POINTS
+    }
+
+    @Override
+    public void discard(){
+        ArrayList<Card> cardsInHand = getHand().getHand();
+        Crib theCrib = getTheCrib();
+        theCrib.getHand().add(cardsInHand.get(0));
+        cardsInHand.remove(0);
+        theCrib.getHand().add(cardsInHand.get(0));
+        cardsInHand.remove(0);
+        setPeggingCards(new ArrayList<>(cardsInHand));
     }
 }

@@ -10,7 +10,7 @@ public class Player {
     private int score;
     private final Hand myHand;
     private ArrayList<Card> peggingCards;
-    public static final Crib theCrib = new Crib();
+    private static final Crib theCrib = new Crib();
     private final Scanner kbd = new Scanner(System.in);
 
     /**
@@ -163,4 +163,11 @@ public class Player {
             }
         }
     }
+    public Hand getHand(){
+        return myHand;
+    }
+
+    public Crib getTheCrib(){return theCrib;}
+    public ArrayList<Card> getPeggingCards(){return peggingCards;}
+    public void setPeggingCards(ArrayList<Card> pegCard){peggingCards = pegCard;}
 }
