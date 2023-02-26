@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Game {
-    public static void main(String[] args) {
+    public static void playGame() {
         //Setting up the game
         Deck theDeck = new Deck();
         Player player = new Player();
@@ -113,5 +113,9 @@ public class Game {
             pone = swap;
         }
 
+    }
+
+    public static void main(String[] args) {
+        playGame();
     }
 }
