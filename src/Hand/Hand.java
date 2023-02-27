@@ -15,6 +15,10 @@ import Game.Counting;
 public class Hand {
     private Card cutCard;
     private ArrayList<Card> hand;
+
+    /**
+     * Initializes the hand with a new array list
+     */
     public Hand(){
         hand = new ArrayList<>();
     }
@@ -40,12 +44,16 @@ public class Hand {
     public Card getCutCard(){return cutCard;}
 
     /**
-     * Gets the hand
+     * Gets the hand without the cut card
      */
     public ArrayList<Card> getHand(){
         return hand;
     }
 
+    /**
+     * Retuns the hand with the cut card
+     * @return the hand with the cut card
+     */
     public ArrayList<Card> getHandWithCutCard(){
         ArrayList<Card> newHand = new ArrayList<>(hand);
         newHand.add(cutCard);

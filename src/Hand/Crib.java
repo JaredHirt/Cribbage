@@ -7,6 +7,11 @@ public class Crib extends Hand{
     public Crib(){
         super();
     }
+
+    /**
+     * Returns the points from the hand
+     * @return the points from the hand
+     */
     @Override
     public int count(){
         int count = 0;

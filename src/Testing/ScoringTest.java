@@ -32,6 +32,14 @@ public class ScoringTest {
 
 
     }
+
+    /**
+     * Checks the score of a hand
+     * @param cards the hand without the cut card
+     * @param cutCard the cut card
+     * @param expectedScore the expected score for the hand
+     * @return if the hand count equals the expected score
+     */
     public static boolean checkScore(ArrayList<Card> cards, Card cutCard, int expectedScore){
         Hand testHand = new Hand();
         testHand.setHand(cards);
@@ -40,6 +48,13 @@ public class ScoringTest {
         return testHand.count() == expectedScore;
     }
 
+    /**
+     * Checks the score for the crib
+     * @param cards the crib without the cut card
+     * @param cutCard the cut card
+     * @param expectedScore the expected score
+     * @return if the score equals the expected score
+     */
     public static boolean checkScoreCrib(ArrayList<Card> cards, Card cutCard, int expectedScore){
         Crib testHand = new Crib();
         testHand.setHand(cards);
@@ -49,6 +64,11 @@ public class ScoringTest {
     }
 
 
+    /**
+     *
+     * @param cards An array of cards
+     * @return the cards but as an ArrayList
+     */
     public static ArrayList<Card> getArrayOfCards(Card[] cards){
         return new ArrayList<>(Arrays.asList(cards));
     }

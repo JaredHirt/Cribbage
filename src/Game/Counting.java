@@ -60,19 +60,25 @@ public class Counting {
         return cards.size();
     }
 
-    /**
-     * Calculates the score for a knob
-     * @param cards the hand of cards excluding the cut card
-     * @param cutCard the card which is cut
-     * @return the point value for knobs in this hand
-     */
 
+    /**
+     * Returns the point from the knob if applicable
+     * @param cards the cards in the hand
+     * @param  cutCard the cut card
+     * @return the point for the knob if applicable
+     */
     public static int knob(ArrayList<Card> cards, Card cutCard){
         for(Card i:cards)
             if(i.getSuit() == cutCard.getSuit() && i.getRank() == Rank.Jack)
                 return 1;
         return 0;
     }
+
+    /**
+     * Returns the points from runs when counting hands
+     * @param cards the cards you want to check for runs
+     * @return the amount of points from runs
+     */
     public static int runs(ArrayList<Card> cards){
         int count = 0;
         StringBuilder set;
@@ -103,12 +109,22 @@ public class Counting {
         return count;
     }
 
+    /**
+     * Returns the amount of points gotten from pegging
+     * @param peggedCards the cards that have been pegged thus far
+     * @return the points gotten from pegging
+     */
     public static int pointsPegging(ArrayList<Card> peggedCards){
         if(peggedCards.size() == 1)
             return 0;
         return points15Pegging(peggedCards) + points31Pegging(peggedCards) + pointsPairsPegging(peggedCards) + pointsRunsPegging(peggedCards);
     }
 
+    /**
+     * Returns the points for 15's from pegging
+     * @param peggedCards the cards that have been pegged thus far
+     * @return the points from 15's for pegging
+     */
     public static int points15Pegging(ArrayList<Card> peggedCards){
         int count = 0;
         for(Card i: peggedCards)
@@ -118,6 +134,11 @@ public class Counting {
         return 0;
     }
 
+    /**
+     * Checks for if the pegging has reached 31
+     * @param peggedCards the cards that have been pegged thus far
+     * @return a point if the player has reached 31 points (they will an additional point when the pegging resets)
+     */
     public static int points31Pegging(ArrayList<Card> peggedCards){
         int count = 0;
         for(Card i: peggedCards)
@@ -127,6 +148,11 @@ public class Counting {
         return 0;
     }
 
+    /**
+     * The pegging points for pairs thus far
+     * @param peggedCards the cards that have been pegged thus far
+     * @return the pegging points for pairs
+     */
     public static int pointsPairsPegging(ArrayList<Card> peggedCards){
         int count = 0;
         if(peggedCards.size() < 2)
@@ -144,6 +170,11 @@ public class Counting {
         return count;
     }
 
+    /**
+     * Counts the pegging points for runs
+     * @param peggedCards the cards that have been pegged thus far
+     * @return the pegging points for runs
+     */
     public static int pointsRunsPegging(ArrayList<Card> peggedCards){
         int highestRun = 0;
         if(peggedCards.size() < 3)
