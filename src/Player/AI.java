@@ -1,7 +1,7 @@
 /**
  *This file is part of a solution to
  * CPSC 101 Group Project Team Frappucino
- * Implements a AI class which holds key variables for the AI and performs some operations
+ * Implements an AI class which holds key variables for the AI and performs some operations
  * @author Jared Hirt
  * Student Number: 230154787
  */

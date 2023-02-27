@@ -1,7 +1,7 @@
 /**
  *This file is part of a solution to
  * CPSC 101 Group Project Team Frappucino
- * Holds all of the game objects, and runs the game
+ * Holds all the game objects, and runs the game
  * @author Jared Hirt
  * Student Number: 230154787
  */

@@ -50,7 +50,7 @@ public class Hand {
     }
 
     /**
-     * Retuns the hand with the cut card
+     * Returns the hand with the cut card
      * @return the hand with the cut card
      */
     public ArrayList<Card> getHandWithCutCard(){
