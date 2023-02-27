@@ -1,12 +1,11 @@
 /**
- 2 * This file is part of a solution to
- 3 * CPSC 101 Group Project Team Frappucino
- 4 *
- 5 * Implements a hand class.
- 7 * @author Jared Hirt
- 8 * Student Number: 230154787
- 9 * @version 0.1
- 10 */
+ *This file is part of a solution to
+ * CPSC 101 Group Project Team Frappucino
+ * Implements a Hand class which holds the hand and the cut card
+ * Has a count hand method
+ * @author Jared Hirt
+ * Student Number: 230154787
+ */
 package Hand;
 import Deck.Card;
 

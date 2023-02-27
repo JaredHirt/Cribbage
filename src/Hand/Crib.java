@@ -1,3 +1,10 @@
+/**
+ *This file is part of a solution to
+ * CPSC 101 Group Project Team Frappucino
+ * Implements a Crib class which acts as a hand but with a separate counting method because of flushes
+ * @author Jared Hirt
+ * Student Number: 230154787
+ */
 package Hand;
 
 import Deck.Card;

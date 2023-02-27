@@ -1,3 +1,10 @@
+/**
+ *This file is part of a solution to
+ * CPSC 101 Group Project Team Frappucino
+ * Implements a Deck class which stores all of the cards used in the project, as well as deals cards to the players each round
+ * @author Jared Hirt
+ * Student Number: 230154787
+ */
 package Deck;
 import java.util.ArrayList;
 import java.util.Collections;

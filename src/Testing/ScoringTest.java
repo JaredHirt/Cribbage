@@ -1,3 +1,10 @@
+/**
+ *This file is part of a solution to
+ * CPSC 101 Group Project Team Frappucino
+ * Implements a testing class to test the scoring capabilities of the hand and cribbage class
+ * @author Jared Hirt
+ * Student Number: 230154787
+ */
 package Testing;
 import Deck.Card;
 import Hand.Hand;

@@ -1,3 +1,11 @@
+/**
+ *This file is part of a solution to
+ * CPSC 101 Group Project Team Frappucino
+ * Implements a Player class which stores key member variables such as the hand, the score, and a link to the crib
+ * Has methods to play cards and discard cards
+ * @author Jared Hirt
+ * Student Number: 230154787
+ */
 package Player;
 import Hand.Hand;
 import Hand.Crib;

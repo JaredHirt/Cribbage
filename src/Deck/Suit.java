@@ -1,12 +1,10 @@
 /**
- 2 * This file is part of a solution to
- 3 * CPSC 101 Lab 4 Winter 2023
- 4 *
- 5 * Implements a Suit enum for the card class
- 7 * @author Jared Hirt
- 8 * Student Number: 230154787
- 9 * @version 1
- 10 */
+ *This file is part of a solution to
+ * CPSC 101 Group Project Team Frappucino
+ * Implements a Suit enum for the Card class
+ * @author Jared Hirt
+ * Student Number: 230154787
+ */
 package Deck;
 
 public enum Suit {Club, Diamond, Heart, Spade}

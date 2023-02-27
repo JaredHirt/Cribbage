@@ -1,12 +1,10 @@
 /**
- 2 * This file is part of a solution to
- 3 * CPSC 101 Group Project Team Frappucino
- 4 *
- 5 * Implements a card class with enum ranks and suits with a cribbage count
- 7 * @author Jared Hirt
- 8 * Student Number: 230154787
- 9 * @version 0.3
- 10 */
+ *This file is part of a solution to
+ * CPSC 101 Group Project Team Frappucino
+ * Implements a card class with enum ranks and suits with a cribbage count
+ * @author Jared Hirt
+ * Student Number: 230154787
+ */
 package Deck;
 
 public class Card implements Comparable<Card>{

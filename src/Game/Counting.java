@@ -1,3 +1,10 @@
+/**
+ *This file is part of a solution to
+ * CPSC 101 Group Project Team Frappucino
+ * Implements a Counting class which returns point values for hands and pegging
+ * @author Jared Hirt
+ * Student Number: 230154787
+ */
 package Game;
 
 import Deck.Card;
