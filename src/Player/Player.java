@@ -153,6 +153,16 @@ public class Player {
 
             System.out.println("\nWhat card would you like to peg with?");
             stringCardToPeg = kbd.next();
+            if(stringCardToPeg.length() == 1)
+                for (Card i : peggingCards)
+                    if (i.toString().substring(0,1).equalsIgnoreCase(stringCardToPeg))
+                        if(canPlayCard(peggedCards, i))
+                            cardToPeg = i;
+            if (cardToPeg != null) {
+                peggingCards.remove(cardToPeg);
+                peggedCards.add(cardToPeg);
+                return;
+            }
             for (Card i : peggingCards)
                 if (i.toString().equalsIgnoreCase(stringCardToPeg))
                     if(canPlayCard(peggedCards, i))
@@ -160,6 +170,7 @@ public class Player {
             if (cardToPeg != null) {
                 peggingCards.remove(cardToPeg);
                 peggedCards.add(cardToPeg);
+                return;
             }
         }
     }
