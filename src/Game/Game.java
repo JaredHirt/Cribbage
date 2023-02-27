@@ -1,14 +1,14 @@
-package Game;
-
 /**
  * Holds all the game objects and runs the game
  */
+package Game;
+
+
 import Deck.Deck;
 import Deck.Card;
 import Deck.Rank;
 import Player.Player;
 import Player.AI;
-import Game.Counting;
 
 
 import java.util.ArrayList;

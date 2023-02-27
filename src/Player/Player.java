@@ -62,6 +62,12 @@ public class Player {
 
     }
 
+    /**
+     * Checks if you can play a card
+     * @param cardsPegged the cards that are pegged thus far
+     * @param cardYouWantToPeg the card that you want to peg
+     * @return if it is legal to peg that card
+     */
     public boolean canPlayCard(ArrayList<Card> cardsPegged, Card cardYouWantToPeg){
         int peggingScore = 0;
         for(Card i:cardsPegged)
@@ -78,13 +84,31 @@ public class Player {
         if(scoreIncrease == 0)
             return;
         score+=scoreIncrease;
-        System.out.println("The Score of the player is " + score);
+        outputScore();
+        checkForWin();
+    }
+
+
+    /**
+     * outputs the score
+     */
+    public void outputScore(){
+        System.out.println("The Score of the Player is " + getScore());
+    }
+
+    /**
+     * Checks if the AI has won the game
+     */
+    public void checkForWin(){
         if(getScore() > 120) {
             System.out.println("THE PLAYER HAS WON THE GAME");
             System.exit(1);
         }
-        //GUI STUFF RIGHT HERE
     }
+
+
+
+
 
     /**
      * Sets up the player for the new round
@@ -105,6 +129,9 @@ public class Player {
      */
     public void countCrib(){increaseScore(theCrib.count());}
 
+    /**
+     * Discards cards from the hand until the player has two cards remaining
+     */
     public void discard(){
         String cardStringToRemove;
         Card cardToRemove = null;
@@ -128,9 +155,18 @@ public class Player {
         peggingCards = new ArrayList<>(myHand.getHand());
     }
 
+    /**
+     * Sets the score
+     * @param newScore the new score
+     */
     public void setScore(int newScore){
         score = newScore;
     }
+
+    /**
+     * Gets the score
+     * @return the score
+     */
     public int getScore(){
         return score;
     }
@@ -143,9 +179,7 @@ public class Player {
         String stringCardToPeg;
         Card cardToPeg = null;
         while(cardToPeg == null) {
-            System.out.print("\nPegged Cards: ");
-            for (Card i : peggedCards)
-                System.out.print(i + " ");
+            outputPeggedCards(peggedCards);
 
             System.out.print("\nCards you can use to peg: ");
             for (Card i : peggingCards)
@@ -153,32 +187,58 @@ public class Player {
 
             System.out.println("\nWhat card would you like to peg with?");
             stringCardToPeg = kbd.next();
-            if(stringCardToPeg.length() == 1)
+            if(stringCardToPeg.length() == 1) {
                 for (Card i : peggingCards)
-                    if (i.toString().substring(0,1).equalsIgnoreCase(stringCardToPeg))
-                        if(canPlayCard(peggedCards, i))
+                    if (i.toString().substring(0, 1).equalsIgnoreCase(stringCardToPeg))
+                        if (canPlayCard(peggedCards, i))
                             cardToPeg = i;
-            if (cardToPeg != null) {
-                peggingCards.remove(cardToPeg);
-                peggedCards.add(cardToPeg);
-                return;
             }
-            for (Card i : peggingCards)
-                if (i.toString().equalsIgnoreCase(stringCardToPeg))
-                    if(canPlayCard(peggedCards, i))
-                        cardToPeg = i;
+            else {
+                for (Card i : peggingCards)
+                    if (i.toString().equalsIgnoreCase(stringCardToPeg))
+                        if (canPlayCard(peggedCards, i))
+                            cardToPeg = i;
+            }
             if (cardToPeg != null) {
                 peggingCards.remove(cardToPeg);
                 peggedCards.add(cardToPeg);
-                return;
             }
         }
     }
+
+    /**
+     * Returns the hand
+     * @return returns the hand
+     */
     public Hand getHand(){
         return myHand;
     }
 
+    /**
+     * Outputs the pegged cards
+     * @param peggedCards the pegged cards thus far
+     */
+    public void outputPeggedCards(ArrayList<Card> peggedCards){
+        System.out.print("\nPegged Cards: ");
+            for (Card i : peggedCards)
+                System.out.print(i + " ");
+    }
+
+    /**
+     * Returns the crib
+     * @return Returns the crib
+     */
     public Crib getTheCrib(){return theCrib;}
+
+    /**
+     * Gets the pegging cards
+     * @return returns the pegging cards
+     */
     public ArrayList<Card> getPeggingCards(){return peggingCards;}
+
+    /**
+     * Sets the pegging cards
+     * @param pegCard sets the pegging cards
+     */
     public void setPeggingCards(ArrayList<Card> pegCard){peggingCards = pegCard;}
 }

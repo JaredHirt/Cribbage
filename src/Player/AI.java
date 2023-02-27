@@ -1,36 +1,55 @@
 package Player;
 import Deck.Card;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import Deck.Deck;
 import Game.Counting;
 import Hand.Crib;
-import Hand.Hand;
 public class AI extends Player{
+    /**
+     * Initializes the AI class the same as the player class
+     */
     public AI(){
         super();
     }
+
+    /**
+     *
+     * @param scoreIncrease the amount to increase the score by
+     * Also updates the GUI and checks if there is a win
+     */
     @Override
         public void increaseScore(int scoreIncrease){
         if(scoreIncrease == 0)
             return;
         setScore(getScore()+scoreIncrease);
+        outputScore();
+        checkForWin();
+        }
+
+    /**
+     * outputs the score
+     */
+    @Override
+    public void outputScore(){
         System.out.println("The Score of the AI is " + getScore());
+    }
+
+    /**
+     * Checks if the AI has won the game
+     */
+    @Override
+    public void checkForWin(){
         if(getScore() > 120) {
             System.out.println("THE AI HAS WON THE GAME");
             System.exit(1);
         }
-        //GUI STUFF RIGHT HERE
     }
 
-    //Please optimize this eventually
 
     /**
-     * Automated AI discard method
+     * Old random discard method, please keep for potential use in easier difficulty
      */
-
     public void randomDiscard(){
         ArrayList<Card> cardsInHand = getHand().getHand();
         Crib theCrib = getTheCrib();
@@ -41,24 +60,40 @@ public class AI extends Player{
         setPeggingCards(new ArrayList<>(cardsInHand));
     }
 
+    /**
+     * chooses which card to get pegged
+     * @param peggedCards the cards that have been pegged in this session
+     */
     @Override
     public void playCard(ArrayList<Card> peggedCards){
+        //Choosing which card to peg
         Card cardToPeg = null;
         ArrayList<Card> peggingCards = getPeggingCards();
         for(Card i: peggingCards)
             if(super.canPlayCard(peggedCards, i)) {
                 cardToPeg = i;
             }
-        peggedCards.add(cardToPeg);
-        getPeggingCards().remove(cardToPeg);
 
-        System.out.print("\nPegged Cards: ");
-            for (Card i : peggedCards)
-                System.out.print(i + " ");
-        System.out.println();
+        pegCard(peggedCards, cardToPeg);
+        super.outputPeggedCards(peggedCards);
 
     }
 
+    /**
+     * Adds a card to pegged cards, and removes it from pegging cards
+     * @param peggedCards the ArrayList of cards that have been already pegged
+     * @param cardToPeg the card you want to peg
+     */
+    private void pegCard(ArrayList<Card> peggedCards, Card cardToPeg){
+        ArrayList<Card> peggingCards = getPeggingCards();
+        peggedCards.add(cardToPeg);
+        peggingCards.remove(cardToPeg);
+
+    }
+
+    /**
+     * does a smart discard of hand, calculates all possible discards and keeps the hand with the highest average point count
+     */
     @Override
     public void discard(){
         ArrayList<Card> hand = getHand().getHand();
@@ -67,7 +102,7 @@ public class AI extends Player{
         ArrayList<Card> discards = new ArrayList<>(hand);
         for(int i = 0; i < hand.size(); i++)
             for(int j = i + 1; j < hand.size();j++){
-                subsetOfHand = new ArrayList<Card>(hand);
+                subsetOfHand = new ArrayList<>(hand);
                 subsetOfHand.remove(hand.get(j));
                 subsetOfHand.remove(hand.get(i));
                 possibleDiscards.add(subsetOfHand);
@@ -85,9 +120,15 @@ public class AI extends Player{
             hand.remove(i);
         }
 
-        setPeggingCards(new ArrayList<Card>(hand));
+        setPeggingCards(new ArrayList<>(hand));
     }
 
+    /**
+     * Finds the total of points the hand could earn with every single cut card
+     * @param subset the subset of hand without the discards
+     * @param hand the full hand even the cards you would discard
+     * @return returns the point of every single possible cut card
+     */
     private static int countOfAllPossibleCutCards(ArrayList<Card> subset, ArrayList<Card> hand){
         int count = 0;
         ArrayList<Card> subsetWithCutCard;
@@ -103,7 +144,7 @@ public class AI extends Player{
             possibleCutCards.remove(cardToRemove);
         }
         for(Card i: possibleCutCards){
-            subsetWithCutCard = new ArrayList<Card>(subset);
+            subsetWithCutCard = new ArrayList<>(subset);
             subsetWithCutCard.add(i);
 
             count += Counting.points15(subsetWithCutCard);
