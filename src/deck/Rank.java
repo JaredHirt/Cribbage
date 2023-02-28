@@ -6,7 +6,7 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package Deck;
+package deck;
 
 public enum Rank {
     Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King ;

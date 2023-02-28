@@ -6,10 +6,10 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package Player;
-import Hand.Hand;
-import Hand.Crib;
-import Deck.Card;
+package player;
+import hand.Hand;
+import hand.Crib;
+import deck.Card;
 import java.util.Scanner;
 
 import java.util.ArrayList;

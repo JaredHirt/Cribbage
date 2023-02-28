@@ -6,11 +6,11 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package Hand;
-import Deck.Card;
+package hand;
+import deck.Card;
 
 import java.util.ArrayList;
-import Game.Counting;
+import game.Counting;
 public class Hand {
     private Card cutCard;
     private ArrayList<Card> hand;

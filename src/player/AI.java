@@ -5,13 +5,13 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package Player;
-import Deck.Card;
+package player;
+import deck.Card;
 
 import java.util.ArrayList;
 
-import Game.Counting;
-import Hand.Crib;
+import game.Counting;
+import hand.Crib;
 public class AI extends Player{
     /**
      * Initializes the AI class the same as the player class
