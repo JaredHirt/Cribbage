@@ -5,14 +5,14 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package Game;
+package game;
 
 
-import Deck.Deck;
-import Deck.Card;
-import Deck.Rank;
-import Player.Player;
-import Player.AI;
+import deck.Deck;
+import deck.Card;
+import deck.Rank;
+import player.Player;
+import player.AI;
 
 
 import java.util.ArrayList;

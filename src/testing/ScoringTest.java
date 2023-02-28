@@ -5,10 +5,10 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package Testing;
-import Deck.Card;
-import Hand.Hand;
-import Hand.Crib;
+package testing;
+import deck.Card;
+import hand.Hand;
+import hand.Crib;
 
 
 import java.util.ArrayList;

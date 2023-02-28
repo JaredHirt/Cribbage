@@ -5,10 +5,10 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package Game;
+package game;
 
-import Deck.Card;
-import Deck.Rank;
+import deck.Card;
+import deck.Rank;
 import java.util.Collections;
 
 import java.util.ArrayList;

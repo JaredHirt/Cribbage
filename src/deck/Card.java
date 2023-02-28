@@ -5,7 +5,7 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package Deck;
+package deck;
 
 public class Card implements Comparable<Card>{
 

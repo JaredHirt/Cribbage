@@ -5,10 +5,10 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package Hand;
+package hand;
 
-import Deck.Card;
-import Game.Counting;
+import deck.Card;
+import game.Counting;
 
 public class Crib extends Hand{
     public Crib(){
