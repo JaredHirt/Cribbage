@@ -19,10 +19,13 @@ public class CribbageFrame extends JFrame {
         GameComponent gameComponent = new GameComponent();
         Game rectangle = new Game(new Point(50, 50), new Point(100, 100));
         gameComponent.addGame(rectangle);
-
-
         this.add(gameComponent);
         revalidate();
+        SwingUtilities.invokeLater( () -> {game.Game.playGame();});
+
+
+
+
     }
 
 }

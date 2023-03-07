@@ -16,6 +16,7 @@ Main {
         CribbageFrame frame = new CribbageFrame();
 
         StartGameButton startGameButton = new StartGameButton(new ImageIcon("src/CribbageGUI_Images/Buttons/StartGameButton.png"), frame);
+        startGameButton.setBorder(BorderFactory.createEmptyBorder());
 
         frame.add(startGameButton, BorderLayout.CENTER);
 
