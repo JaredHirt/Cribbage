@@ -6,8 +6,9 @@
  * Student Number: 230154787
  */
 package deck;
+import javax.swing.*;
 
-public class Card implements Comparable<Card>{
+public class Card extends JButton implements Comparable<Card>{
 
     private final Rank rank;
     private final Suit suit;
@@ -21,6 +22,7 @@ public class Card implements Comparable<Card>{
     public Card(Rank rank, Suit suit){
         this.rank = rank;
         this.suit = suit;
+        setIcon(new ImageIcon("src/CribbageGUI_Images/Cards/" + this.toString() + ".png"));
     }
 
     /**
@@ -108,6 +110,8 @@ public class Card implements Comparable<Card>{
     public int compareTo(Card a){
         return Integer.compare(this.rank.ordinal(), a.rank.ordinal());
     }
+
+
 
 
 

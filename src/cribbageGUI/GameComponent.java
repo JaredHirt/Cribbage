@@ -10,6 +10,7 @@ public class GameComponent extends JComponent{
 
     public GameComponent(){
         super();
+        setLayout(new GridBagLayout());
         myGame = new ArrayList<Game>();
     }
 
