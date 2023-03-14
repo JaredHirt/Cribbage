@@ -24,27 +24,36 @@ public class Controller {
 
         //Turn this game component into the actual game, draw the cribbage board, set the pegs to 0
         GameComponent gameComponent = new GameComponent();
+        gameComponent.accessCutCard().add(Card.getCard(5));
 
-        GridBagConstraints board = new GridBagConstraints();
-        board.gridx = 0;
-        board.gridy = 0;
-        board.gridwidth = 1;
-        board.gridheight = 0;
-        board.fill = GridBagConstraints.BOTH;
-        gameComponent.add(Card.getCard(7), board);
+        gameComponent.accessYourCards().add(Card.getCard(1));
+        gameComponent.accessYourCards().add(Card.getCard(2));
+        gameComponent.accessYourCards().add(Card.getCard(3));
+        gameComponent.accessYourCards().add(Card.getCard(4));
+        gameComponent.accessYourCards().add(Card.getCard(5));
+        gameComponent.accessYourCards().add(Card.getCard(6));
 
-        GridBagConstraints stats = new GridBagConstraints();
-        stats.gridx = 1;
-        stats.gridy = 0;
-        stats.gridwidth = 1;
-        stats.gridheight = 1;
-        stats.fill = GridBagConstraints.BOTH;
-        gameComponent.add(Card.getCard(2), stats);
+        gameComponent.accessOpponentCards().add(Card.getCard(1));
+        gameComponent.accessOpponentCards().add(Card.getCard(2));
+        gameComponent.accessOpponentCards().add(Card.getCard(3));
+        gameComponent.accessOpponentCards().add(Card.getCard(4));
+        gameComponent.accessOpponentCards().add(Card.getCard(5));
+        gameComponent.accessOpponentCards().add(Card.getCard(6));
+
+        gameComponent.accessPeggedCards().add(Card.getCard(23));
+        gameComponent.accessPeggedCards().add(Card.getCard(24));
+        gameComponent.accessPeggedCards().add(Card.getCard(25));
+        gameComponent.accessPeggedCards().add(Card.getCard(26));
+        gameComponent.accessPeggedCards().add(Card.getCard(27));
+        gameComponent.accessPeggedCards().add(Card.getCard(28));
+        gameComponent.accessPeggedCards().add(Card.getCard(29));
+        gameComponent.accessPeggedCards().add(Card.getCard(30));
+
+        gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/2C.png")));
 
         frame.add(gameComponent);
-        frame.pack();
         frame.revalidate();
-        game.Game.playGame();
+        //game.Game.playGame();
 
 
     }
