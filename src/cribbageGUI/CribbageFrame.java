@@ -22,23 +22,25 @@ public class CribbageFrame extends JFrame {
         Game rectangle = new Game(new Point(50, 50), new Point(100, 100));
 
         GridBagConstraints board = new GridBagConstraints();
-        board.gridx = 2;
-        board.gridy = 1;
+        board.gridx = 0;
+        board.gridy = 0;
         board.gridwidth = 1;
-        board.gridheight = 2;
+        board.gridheight = 0;
+        board.fill = GridBagConstraints.BOTH;
         gameComponent.add(Card.getCard(7), board);
 
         GridBagConstraints stats = new GridBagConstraints();
-        stats.gridx = 2;
-        stats.gridy = 2;
+        stats.gridx = 1;
+        stats.gridy = 0;
         stats.gridwidth = 1;
         stats.gridheight = 1;
-        stats.anchor = GridBagConstraints.LINE_END;
+        stats.fill = GridBagConstraints.BOTH;
         gameComponent.add(Card.getCard(2), stats);
 
         this.add(gameComponent);
+        pack();
         revalidate();
-        SwingUtilities.invokeLater( () -> {game.Game.playGame();});
+        //SwingUtilities.invokeLater( () -> {game.Game.playGame();});
 
 
 
