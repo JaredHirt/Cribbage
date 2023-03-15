@@ -8,6 +8,7 @@
 package game;
 
 
+import cribbageGUI.Controller;
 import deck.Deck;
 import deck.Card;
 import deck.Rank;
@@ -19,7 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Game {
-    public static void playGame() {
+    public static void playGame(cribbageGUI.Controller controller) {
+        cribbageGUI.Controller control = controller;
         //Setting up the game
         Deck theDeck = new Deck();
         Player player = new Player();
@@ -117,9 +119,5 @@ public class Game {
             pone = swap;
         }
 
-    }
-
-    public static void main(String[] args) {
-        playGame();
     }
 }

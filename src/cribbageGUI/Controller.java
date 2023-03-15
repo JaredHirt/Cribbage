@@ -52,8 +52,8 @@ public class Controller {
         gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/2C.png")));
 
         frame.add(gameComponent);
-        frame.revalidate();
-        //game.Game.playGame();
+        frame.repaint();
+        game.Game.playGame(this);
 
 
     }
