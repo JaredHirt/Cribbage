@@ -12,9 +12,9 @@ public class GameComponent extends JComponent{
     private JPanel opponentCards;
     private JPanel peggedCards;
     private JPanel yourCards;
-    private JComponent cribBoard;
-    private JComponent cutCard;
-    private JComponent info;
+    private JPanel cribBoard;
+    private JPanel cutCard;
+    private JPanel info;
 
     public GameComponent(){
         super();
@@ -38,6 +38,7 @@ public class GameComponent extends JComponent{
         oppCards.gridwidth = 3;
         oppCards.gridheight = 1;
         oppCards.fill = GridBagConstraints.BOTH;
+        oppCards.weighty = 1;
         add(opponentCards, oppCards);
 
         GridBagConstraints pegCards = new GridBagConstraints();
@@ -45,6 +46,7 @@ public class GameComponent extends JComponent{
         pegCards.gridy = 1;
         pegCards.gridwidth = 3;
         pegCards.gridheight = 1;
+        pegCards.weighty = 0.5;
         pegCards.fill = GridBagConstraints.BOTH;
         add(peggedCards, pegCards);
 
@@ -53,6 +55,7 @@ public class GameComponent extends JComponent{
         playerCards.gridy = 2;
         playerCards.gridwidth = 3;
         playerCards.gridheight = 1;
+        playerCards.weighty = 0;
         playerCards.fill = GridBagConstraints.BOTH;
         add(yourCards, playerCards);
 

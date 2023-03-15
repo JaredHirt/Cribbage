@@ -21,6 +21,7 @@ public class Controller {
 
     public void startTheGame(StartGameButton buttonToRemove){
         frame.remove(buttonToRemove);
+        repaint();
 
         //Turn this game component into the actual game, draw the cribbage board, set the pegs to 0
         GameComponent gameComponent = new GameComponent();
@@ -49,12 +50,15 @@ public class Controller {
         gameComponent.accessPeggedCards().add(Card.getCard(29));
         gameComponent.accessPeggedCards().add(Card.getCard(30));
 
-        gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/2C.png")));
+        gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/Buttons/PotentialCribBoard.png")));
 
         frame.add(gameComponent);
+        repaint();
+        frame.pack();
+    }
+
+    public void repaint(){
         frame.repaint();
-        game.Game.playGame(this);
-
-
+        frame.revalidate();
     }
 }

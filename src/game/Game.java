@@ -23,6 +23,7 @@ public class Game {
     public static void playGame(cribbageGUI.Controller controller) {
         cribbageGUI.Controller control = controller;
         //Setting up the game
+        controller.repaint();
         Deck theDeck = new Deck();
         Player player = new Player();
         AI ai = new AI();
