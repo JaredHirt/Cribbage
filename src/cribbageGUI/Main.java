@@ -1,5 +1,7 @@
 package cribbageGUI;
 
+import game.Game;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,8 +20,10 @@ Main {
         StartGameButton startGameButton = new StartGameButton(new ImageIcon("src/CribbageGUI_Images/Buttons/StartGameButton.png"));
         startGameButton.setBorder(BorderFactory.createEmptyBorder());
         GameComponent gameComponent = new GameComponent();
-        Controller controller = new Controller(frame, gameComponent, startGameButton);
+        Game game = new Game();
+        Controller controller = new Controller(frame, gameComponent, startGameButton, game);
         frame.add(startGameButton, BorderLayout.CENTER);
+
 
     }
 

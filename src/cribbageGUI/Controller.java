@@ -8,14 +8,17 @@ public class Controller {
     private CribbageFrame frame;
     private GameComponent gameComponent;
     private StartGameButton startGameButton;
+    private game.Game game;
 
-    public Controller(CribbageFrame frame, GameComponent gameComponent, StartGameButton startGameButton) {
+    public Controller(CribbageFrame frame, GameComponent gameComponent, StartGameButton startGameButton, game.Game game) {
         this.frame = frame;
         this.gameComponent = gameComponent;
         this.startGameButton = startGameButton;
+        this.game = game;
         frame.setController(this);
         gameComponent.setController(this);
         startGameButton.setController(this);
+        game.setController(this);
 
     }
 

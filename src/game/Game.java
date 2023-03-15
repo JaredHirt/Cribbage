@@ -20,9 +20,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Game {
-    public static void playGame(cribbageGUI.Controller controller) {
+    private boolean gameStarted;
+    private Controller controller;
+    public void playGame() {
+        gameStarted = false;
         cribbageGUI.Controller control = controller;
         //Setting up the game
+        //Makes the thread sleep until gameStarted becomes true
+        while(!gameStarted){}
+
         controller.repaint();
         Deck theDeck = new Deck();
         Player player = new Player();
@@ -120,5 +126,9 @@ public class Game {
             pone = swap;
         }
 
+    }
+    public void setController(Controller control){controller = control;}
+    public void startGame(){
+        gameStarted = true;
     }
 }
