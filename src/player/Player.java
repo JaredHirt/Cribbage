@@ -7,6 +7,8 @@
  * Student Number: 230154787
  */
 package player;
+import cribbageGUI.Controller;
+import game.Counting;
 import hand.Hand;
 import hand.Crib;
 import deck.Card;
@@ -20,6 +22,7 @@ public class Player {
     private ArrayList<Card> peggingCards;
     private static final Crib theCrib = new Crib();
     private final Scanner kbd = new Scanner(System.in);
+    private Controller controller;
 
     /**
      * Player constructor
@@ -193,7 +196,7 @@ public class Player {
      * Pegs a card
      * @param peggedCards the cards that have been pegged in this session
      */
-    public void playCard(ArrayList<Card> peggedCards){
+    public void playCardTerminal(ArrayList<Card> peggedCards){
         String stringCardToPeg;
         Card cardToPeg = null;
         while(cardToPeg == null) {
@@ -221,6 +224,23 @@ public class Player {
                 peggingCards.remove(cardToPeg);
                 peggedCards.add(cardToPeg);
             }
+        }
+    }
+
+    public void playCard(ArrayList<Card> peggedCards){
+        for(Card c:peggingCards){
+            if(canPlayCard(peggedCards, c))
+                c.addActionListener(ae -> {
+                            for(Card ca:peggingCards)
+                                ca.removeAllActionListeners();
+                            peggingCards.remove(c);
+                            peggedCards.add(c);
+                            increaseScore(Counting.pointsPegging(peggedCards));
+
+                            controller.drawState();
+                            playCard(peggedCards);
+
+                        });
         }
     }
 
@@ -260,4 +280,7 @@ public class Player {
      */
     public void setPeggingCards(ArrayList<Card> pegCard){peggingCards = pegCard;}
     public Card getCutCard(){return myHand.getCutCard();}
+    public void setController(Controller control){
+        controller = control;
+    }
 }
