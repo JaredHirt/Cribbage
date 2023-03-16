@@ -58,10 +58,17 @@ public class Controller {
         frame.add(gameComponent);
         repaint();
         frame.pack();
+        startGame();
+        game.notifyAll();
+
     }
 
     public void repaint(){
         frame.repaint();
         frame.revalidate();
+    }
+
+    public void startGame(){
+        game.startGame();
     }
 }

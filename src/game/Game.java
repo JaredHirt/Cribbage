@@ -22,12 +22,16 @@ import java.util.Arrays;
 public class Game {
     private boolean gameStarted;
     private Controller controller;
-    public void playGame() {
+    public void playGame() throws InterruptedException {
         gameStarted = false;
         cribbageGUI.Controller control = controller;
         //Setting up the game
         //Makes the thread sleep until gameStarted becomes true
-        while(!gameStarted){}
+        try {
+            wait();
+        } catch (InterruptedException e){
+
+        }
 
         controller.repaint();
         Deck theDeck = new Deck();
