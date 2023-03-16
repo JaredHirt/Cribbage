@@ -7,6 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+
+ * This class represents the graphical component of the Cribbage game.
+ * It extends JComponent and contains various panels for displaying game elements.
+ */
 public class GameComponent extends JComponent{
     private Controller controller;
     private CardPanel opponentCards;
@@ -16,6 +21,9 @@ public class GameComponent extends JComponent{
     private CardPanel cutCard;
     private ScoreComponent info;
 
+    /**
+     * Constructor for the GameComponent class. Initializes all the necessary components and adds them to the layout.
+     */
     public GameComponent(){
         super();
         setLayout(new GridBagLayout());
@@ -84,15 +92,43 @@ public class GameComponent extends JComponent{
         infoPane.anchor = GridBagConstraints.NORTHWEST;
         add(info, infoPane);
 
-
     }
-    public void setController(Controller control){controller = control;}
-    public CardPanel accessOpponentCards(){return opponentCards;}
-    public CardPanel accessPeggedCards(){return peggedCards;}
-    public CardPanel accessYourCards(){return yourCards;}
-    public JComponent accessBoard(){return cribBoard;}
-    public CardPanel accessCutCard(){return cutCard;}
-    public ScoreComponent accessInfo(){return info;}
 
+    /**
+     * Sets the controller for the GameComponent.
+     * @param control The controller to set.
+     */
+    public void setController(Controller control){controller = control;}
+
+
+    /**
+     * @return The opponent's card panel.
+     */
+    public CardPanel accessOpponentCards(){return opponentCards;}
+
+    /**
+     * @return The pegged card panel.
+     */
+    public CardPanel accessPeggedCards(){return peggedCards;}
+
+    /**
+     * @return the panel containing the user's cards
+     */
+    public CardPanel accessYourCards(){return yourCards;}
+
+    /**
+     * @return the component containing the cribbage board
+     */
+    public JComponent accessBoard(){return cribBoard;}
+
+    /**
+     * @return the panel containing the cut card
+     */
+    public CardPanel accessCutCard(){return cutCard;}
+
+    /**
+     * @return the component containing the score information
+     */
+    public ScoreComponent accessInfo(){return info;}
 
 }

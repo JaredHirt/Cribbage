@@ -1,9 +1,12 @@
 package cribbageGUI;
+
 import javax.swing.*;
 import deck.Card;
 import deck.Rank;
 
-
+/**
+ * The controller class for the Cribbage game.
+ */
 public class Controller {
     private CribbageFrame frame;
     private GameComponent gameComponent;
@@ -11,6 +14,14 @@ public class Controller {
     private game.Game game;
     private Card cutCard;
 
+    /**
+     * Creates a new instance of the Controller class.
+     *
+     * @param frame the main frame of the Cribbage game
+     * @param gameComponent the component that displays the game state
+     * @param startGameButton the button used to start the game
+     * @param game the Cribbage game instance
+     */
     public Controller(CribbageFrame frame, GameComponent gameComponent, StartGameButton startGameButton, game.Game game) {
         this.frame = frame;
         this.gameComponent = gameComponent;
@@ -23,6 +34,11 @@ public class Controller {
 
     }
 
+    /**
+     * Starts the game by removing the start game button and drawing the game state.
+     *
+     * @param buttonToRemove the button to remove
+     */
     public void startTheGame(StartGameButton buttonToRemove){
         frame.remove(buttonToRemove);
         //Turn this game component into the actual game, draw the cribbage board, set the pegs to 0
@@ -30,6 +46,9 @@ public class Controller {
         newRound();
     }
 
+    /**
+     * Repaints the game state.
+     */
     public void repaint(){
         frame.add(gameComponent);
         frame.revalidate();
@@ -37,6 +56,9 @@ public class Controller {
 
     }
 
+    /**
+     * Draws the game state.
+     */
     public void drawState(){
         gameComponent.accessYourCards().removeAll();
         for(Card c: game.getPlayer().getPeggingCards())
@@ -61,6 +83,9 @@ public class Controller {
 
     }
 
+    /**
+     * Starts a new round by dealing the cards and drawing the game state.
+     */
     public void newRound(){
         game.deal();
         cutCard = Card.getBlankCard();
@@ -81,6 +106,13 @@ public class Controller {
                 }
                     });
     }
+
+    /**
+
+     * Starts a new Pegging round by setting the cut card, giving 2 points to the dealer if the cut card is a Jack,
+     * and calling the playCard method for the human player.
+     * It then calls the drawState method to update the game's UI.
+     */
     public void newPeggingRound(){
         cutCard = game.getPlayer().getCutCard();
         //Gives two points to dealer for "his knees"
@@ -91,6 +123,13 @@ public class Controller {
         drawState();
     }
 
+    /**
+
+     * Passes the turn to the AI player if it can play a card, otherwise passes the turn to the human player
+     * if it can play a card. If neither player can play a card, the round is reset, 1 point is given to the AI player,
+     * the pegged cards are cleared, and the AI player plays a card.
+     * It then calls the drawState method to update the game's UI.
+     */
     public void passPeggingToAI(){
         if(game.getAi().canPlayCard(game.getPeggedCards()))
             game.getAi().playCard(game.getPeggedCards());
@@ -108,6 +147,13 @@ public class Controller {
 
     }
 
+    /**
+
+     * Passes the turn to the human player if it can play a card, otherwise passes the turn to the AI player
+     * if it can play a card. If neither player can play a card, the round is reset, 1 point is given to the AI player,
+     * the pegged cards are cleared, and the human player plays a card.
+     * It then calls the drawState method to update the game's UI.
+     */
     public void passPeggingtoPlayer() {
         if (game.getPlayer().canPlayCard(game.getPeggedCards()))
             game.getPlayer().playCard(game.getPeggedCards());
@@ -124,6 +170,13 @@ public class Controller {
         }
 
     }
+
+    /**
+
+     * Method called when the pegging phase is finished, and it's time to count the points and start a new round.
+     * This method counts the hands of both the Pone and the Dealer, as well as the Dealer's crib.
+     * It then swaps the dealer and starts a new round.
+     */
     public void peggingDone(){
         game.getPone().countHand();
         game.getDealer().countHand();
