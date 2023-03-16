@@ -4,6 +4,8 @@ import javax.swing.*;
 import deck.Card;
 import deck.Rank;
 
+import java.util.ArrayList;
+
 /**
  * The controller class for the Cribbage game.
  */
@@ -77,7 +79,7 @@ public class Controller {
 
         gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/Buttons/PotentialCribBoard.png")));
         gameComponent.accessInfo().removeAll();
-        gameComponent.accessInfo().add(new ScoreComponent(game.getPlayer().getScore(), game.getAi().getScore()));
+        gameComponent.accessInfo().add(new ScoreComponent(game.getPlayer().getScore(), game.getAi().getScore(), game.getDealer()));
 
         repaint();
 
@@ -183,6 +185,11 @@ public class Controller {
         game.getDealer().countCrib();
         game.swapDealer();
         newRound();
+    }
+
+
+    public void showCountingOfHand(ArrayList<Card> hand){
+
     }
 }
 

@@ -1,5 +1,8 @@
 package cribbageGUI;
 
+import player.AI;
+import player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,7 +19,7 @@ public class ScoreComponent extends JComponent {
      * @param playerPoints the initial score of the player.
      * @param aiPoints the initial score of the computer.
      */
-    public ScoreComponent(int playerPoints, int aiPoints){
+    public ScoreComponent(int playerPoints, int aiPoints, Player dealer){
         super();
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createRaisedBevelBorder());
@@ -29,16 +32,23 @@ public class ScoreComponent extends JComponent {
         computerScore.setFont(new Font("MENLO", Font.BOLD, 24));
         playerScore.setOpaque(true);
         computerScore.setOpaque(true);
-        playerScore.setBackground(Color.BLACK);
-        computerScore.setBackground(Color.BLACK);
+        playerScore.setBackground(Color.LIGHT_GRAY);
+        computerScore.setBackground(Color.LIGHT_GRAY);
         playerScore.setForeground(Color.BLUE);
         computerScore.setForeground(Color.RED);
 
         setPlayerScore(playerPoints);
         setComputerScore(aiPoints);
 
-        add(playerScore, BorderLayout.NORTH);
-        add(computerScore, BorderLayout.SOUTH);
+
+
+        if(dealer instanceof AI)
+            playerScore.setBackground(Color.WHITE);
+        else
+            computerScore.setBackground(Color.WHITE);
+
+        add(playerScore, BorderLayout.SOUTH);
+        add(computerScore, BorderLayout.NORTH);
     }
 
     /**

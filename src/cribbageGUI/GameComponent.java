@@ -2,6 +2,7 @@ package cribbageGUI;
 
 
 import deck.Card;
+import player.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,7 @@ public class GameComponent extends JComponent{
         yourCards = new CardPanel();
         cribBoard = new JPanel();
         cutCard = new CardPanel();
-        info = new ScoreComponent(0, 0);
+        info = new ScoreComponent(0, 0, new Player());
 
         cutCard.setLayout(new BorderLayout());
         cribBoard.setLayout(new BorderLayout());
