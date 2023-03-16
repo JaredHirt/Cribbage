@@ -87,7 +87,7 @@ public class Controller {
         if(cutCard.getRank() == Rank.Jack)
             game.getDealer().increaseScore(2);
         drawState();
-        game.getPlayer().playCard(game.getPeggedCards());
+        game.getPone().playCard(game.getPeggedCards());
         drawState();
     }
 
@@ -125,7 +125,11 @@ public class Controller {
 
     }
     public void peggingDone(){
-        System.out.println("Pegging done");
+        game.getPone().countHand();
+        game.getDealer().countHand();
+        game.getDealer().countCrib();
+        game.swapDealer();
+        newRound();
     }
 }
 
