@@ -54,10 +54,6 @@ public class Controller {
         gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/Buttons/PotentialCribBoard.png")));
 
         frame.add(gameComponent);
-
-
-        startGame();
-
     }
 
     public void repaint(){
@@ -68,13 +64,10 @@ public class Controller {
 
     }
 
-    public void startGame(){
-        game.gameStarted();
-    }
 
     public void drawState(){
         gameComponent.accessYourCards().setCardsToDraw(game.getPlayer().getPeggingCards());
-        gameComponent.accessYourCards().paint
+        repaint();
 
     }
 }

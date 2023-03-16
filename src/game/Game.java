@@ -15,7 +15,6 @@ import deck.Rank;
 import player.Player;
 import player.AI;
 import javax.swing.*;
-import java.util.concurrent.CountDownLatch;
 
 
 import java.util.ArrayList;
@@ -26,32 +25,24 @@ public class Game {
     private Controller controller;
     private Player player;
     private AI ai;
-    private CountDownLatch countDownLatch;
+    private Player dealer;
+    private Player pone;
+    private Deck theDeck;
+    private ArrayList cardsPegged;
 
-
-    public void playGame() throws InterruptedException{
-        //Waiting for button
-        countDownLatch = new CountDownLatch(1);
-        countDownLatch.await();
-
-
-
-
-        //Setting up the game
-
+    public Game(){
         cribbageGUI.Controller control = controller;
-        controller.repaint();
-        System.out.println("hi");
-        Deck theDeck = new Deck();
+        //Setting up the game
+        theDeck = new Deck();
         player = new Player();
         ai = new AI();
-
         Player pone = null;
         Player dealer = null;
         Player swap;
+        cardsPegged = new ArrayList<>();
+    }
 
-        ArrayList<Card> cardsPegged = new ArrayList<>();
-
+    public void findDealer(){
         //Finding out who the dealer is
         //Need to make a GUI for this action
         boolean dealerFound = false;
@@ -70,74 +61,45 @@ public class Game {
             }
         }
 
-        //Game is now setup, now play can begin
-        //while(true) is temporary, it represents a round, replace it later down to make the code more readable
-        while(true){
-            System.out.println("\n\n\n\nBEGINNING OF NEW ROUND");
-            if(dealer instanceof AI)
-                System.out.println("Player is the Pone");
-            else System.out.println("Player is the Dealer");
-            dealer.newRound();
-            pone.newRound();
-            cardsPegged.clear();
+    }
 
-            //Dealing the cards 1-6 is for the dealer, 7-12 is for the pone, 13 is the cut card which is not revealed to the players yet
-            dealtCards = theDeck.returnUniqueCards(13);
-            //This monstrosity of code is getting the first 6 numbers of dealtCards and passing it to the setHand method
-            dealer.setHand(new ArrayList<>(Arrays.asList(Arrays.copyOfRange(dealtCards, 0, 6))));
-            pone.setHand(new ArrayList<>(Arrays.asList(Arrays.copyOfRange(dealtCards, 6, 12))));
+    public void deal(){
+        Card[] dealtCards;
+        dealer.newRound();
+        pone.newRound();
+        cardsPegged.clear();
+        //Dealing the cards 1-6 is for the dealer, 7-12 is for the pone, 13 is the cut card which is not revealed to the players yet
+        dealtCards = theDeck.returnUniqueCards(13);
+        //This monstrosity of code is getting the first 6 numbers of dealtCards and passing it to the setHand method
+        dealer.setHand(new ArrayList<>(Arrays.asList(Arrays.copyOfRange(dealtCards, 0, 6))));
+        pone.setHand(new ArrayList<>(Arrays.asList(Arrays.copyOfRange(dealtCards, 6, 12))));
 
-            dealer.setCutCard(dealtCards[12]);
-            pone.setCutCard(dealtCards[12]);
+        dealer.setCutCard(dealtCards[12]);
+        pone.setCutCard(dealtCards[12]);
+    }
 
-            drawState();
+    public void swapDealer(){
+        Player swap = dealer;
+        dealer = pone;
+        pone = swap;
+    }
+    public void countHands(){
+        pone.countHand();
+        dealer.countHand();
+        dealer.countCrib();
+    }
+    public void ponePegging(){
 
-            //The cards are now all dealt
-
-            dealer.discard();
-            pone.discard();
-            //Make sure to set the pegging hand with the discard method
-
-            //Reveal cut card in the GUI, if it is a jack then give the dealer 2 points for "his knees"
-            if(dealtCards[12].getRank() == Rank.Jack)
-                dealer.increaseScore(2);
-
-
-            //Code for pegging
-
-            while(dealer.howManyCardsInHand() + pone.howManyCardsInHand() > 0) {
-                //Pone Pegging
-                if (pone.canPlayCard(cardsPegged)) {
-                    pone.playCard(cardsPegged);
-                    pone.increaseScore(Counting.pointsPegging(cardsPegged));
-                    if(!(pone.canPlayCard(cardsPegged) || dealer.canPlayCard(cardsPegged))) {
-                        pone.increaseScore(1);
-                        cardsPegged.clear();
-                    }
-                }
-
-
-
-                //Dealer Pegging
-                if (dealer.canPlayCard(cardsPegged)) {
-                    dealer.playCard(cardsPegged);
-                    dealer.increaseScore(Counting.pointsPegging(cardsPegged));
-                    if(!(pone.canPlayCard(cardsPegged) || dealer.canPlayCard(cardsPegged))) {
-                        dealer.increaseScore(1);
-                        cardsPegged.clear();
-                    }
+        while(dealer.howManyCardsInHand() + pone.howManyCardsInHand() > 0) {
+            //Pone Pegging
+            if (pone.canPlayCard(cardsPegged)) {
+                pone.playCard(cardsPegged);
+                pone.increaseScore(Counting.pointsPegging(cardsPegged));
+                if(!(pone.canPlayCard(cardsPegged) || dealer.canPlayCard(cardsPegged))) {
+                    pone.increaseScore(1);
+                    cardsPegged.clear();
                 }
             }
-
-            //Counting the score of the hands
-            pone.countHand();
-            dealer.countHand();
-            dealer.countCrib();
-
-            //Switching the dealer and the pone for the next round
-            swap = dealer;
-            dealer = pone;
-            pone = swap;
         }
 
     }
@@ -145,10 +107,6 @@ public class Game {
 
     public Player getPlayer(){return player;}
     public AI getAi(){return ai;}
-
-    public void gameStarted(){
-        countDownLatch.countDown();
-    }
 
     public void drawState(){
         controller.drawState();
