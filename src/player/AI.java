@@ -6,6 +6,7 @@
  * Student Number: 230154787
  */
 package player;
+import cribbageGUI.Controller;
 import deck.Card;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class AI extends Player{
     public void checkForWin(){
         if(getScore() > 120) {
             System.out.println("THE AI HAS WON THE GAME");
-            System.exit(1);
+            controller.restart();
         }
     }
 

@@ -197,5 +197,13 @@ public class Controller {
     public void showCountingOfHand(ArrayList<Card> hand){
 
     }
+
+    public void restart(){
+        RestartGameButton restartGameButton = new RestartGameButton();
+        restartGameButton.setController(new Controller(frame, gameComponent,restartGameButton, game));
+        frame.add(restartGameButton);
+        frame.revalidate();
+        frame.repaint();
+    }
 }
 

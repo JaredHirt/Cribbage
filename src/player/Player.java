@@ -111,9 +111,9 @@ public class Player {
      * Checks if the AI has won the game
      */
     public void checkForWin(){
-        if(getScore() > 120) {
+        if(getScore() > 12) {
             System.out.println("THE PLAYER HAS WON THE GAME");
-            System.exit(1);
+            controller.restart();
         }
     }
 
