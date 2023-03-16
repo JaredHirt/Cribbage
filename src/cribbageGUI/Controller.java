@@ -58,8 +58,8 @@ public class Controller {
         frame.add(gameComponent);
         repaint();
         frame.pack();
+        System.out.println("hello");
         startGame();
-        game.notifyAll();
 
     }
 
@@ -71,4 +71,14 @@ public class Controller {
     public void startGame(){
         game.startGame();
     }
+
+    public void drawState(){
+        gameComponent.accessOpponentCards().removeAll();
+        gameComponent.accessYourCards().removeAll();
+        gameComponent.accessPeggedCards().removeAll();
+        for(Card i: game.getPlayer().getPeggingCards()){
+
+        }
+    }
 }
+

@@ -23,17 +23,21 @@ import java.util.Arrays;
 public class Game {
     private boolean gameStarted;
     private Controller controller;
-    private CountDownLatch countDownLatch;
     private Player player;
     private AI ai;
+    private CountDownLatch countDownLatch;
 
-    public void playGame() throws InterruptedException {
+
+    public void playGame() throws InterruptedException{
+        //Setting up the game
+
+        //Makes the thread sleep until countDownLatch finishes
         countDownLatch = new CountDownLatch(1);
+        countDownLatch.await();
+
 
         cribbageGUI.Controller control = controller;
-        //Setting up the game
-        //Makes the thread sleep until gameStarted becomes true
-        countDownLatch.await();
+
 
         controller.repaint();
         Deck theDeck = new Deck();
@@ -135,7 +139,9 @@ public class Game {
     }
     public void setController(Controller control){controller = control;}
     public void startGame(){
+        gameStarted = true;
         countDownLatch.countDown();
+        System.out.println("heard");
     }
 
     public Player getPlayer(){return player;}
