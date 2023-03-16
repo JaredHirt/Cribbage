@@ -2,15 +2,13 @@ package cribbageGUI;
 import javax.swing.*;
 import deck.Card;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Controller {
     private CribbageFrame frame;
     private GameComponent gameComponent;
     private StartGameButton startGameButton;
     private game.Game game;
+    private Card cutCard;
 
     public Controller(CribbageFrame frame, GameComponent gameComponent, StartGameButton startGameButton, game.Game game) {
         this.frame = frame;
@@ -26,47 +24,44 @@ public class Controller {
 
     public void startTheGame(StartGameButton buttonToRemove){
         frame.remove(buttonToRemove);
-        repaint();
-
         //Turn this game component into the actual game, draw the cribbage board, set the pegs to 0
         GameComponent gameComponent = new GameComponent();
-        gameComponent.accessCutCard().add(Card.getCard(5));
-
-
-        gameComponent.accessOpponentCards().add(Card.getCard(1));
-        gameComponent.accessOpponentCards().add(Card.getCard(2));
-        gameComponent.accessOpponentCards().add(Card.getCard(3));
-        gameComponent.accessOpponentCards().add(Card.getCard(4));
-        gameComponent.accessOpponentCards().add(Card.getCard(5));
-        gameComponent.accessOpponentCards().add(Card.getCard(6));
-
-        gameComponent.accessPeggedCards().add(Card.getCard(23));
-        gameComponent.accessPeggedCards().add(Card.getCard(24));
-        gameComponent.accessPeggedCards().add(Card.getCard(25));
-        gameComponent.accessPeggedCards().add(Card.getCard(26));
-        gameComponent.accessPeggedCards().add(Card.getCard(27));
-        gameComponent.accessPeggedCards().add(Card.getCard(28));
-        gameComponent.accessPeggedCards().add(Card.getCard(29));
-        gameComponent.accessPeggedCards().add(Card.getCard(30));
-
-        gameComponent.accessYourCards().add(new JButton("hello"));
-
+        game.deal();
+        cutCard = Card.getBlankCard();
         gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/Buttons/PotentialCribBoard.png")));
+        gameComponent.accessInfo().add(new ScoreComponent());
 
         frame.add(gameComponent);
+
+        drawState();
+        drawState();
+        frame.revalidate();
     }
 
     public void repaint(){
-        SwingUtilities.updateComponentTreeUI(frame);
-        frame.invalidate();
-        frame.validate();
+        frame.revalidate();
         frame.repaint();
+        frame.add(gameComponent);
+        frame.pack();
 
     }
 
-
     public void drawState(){
-        gameComponent.accessYourCards().setCardsToDraw(game.getPlayer().getPeggingCards());
+        gameComponent.accessYourCards().removeAll();
+        for(Card c: game.getPlayer().getPeggingCards())
+            gameComponent.accessYourCards().add(c);
+
+        gameComponent.accessOpponentCards().removeAll();
+        for(Card c: game.getAi().getPeggingCards())
+            gameComponent.accessOpponentCards().add(Card.getBlankCard());
+
+        gameComponent.accessPeggedCards().removeAll();
+        for(Card c: game.getPlayer().getPeggingCards())
+            gameComponent.accessPeggedCards().add(Card.getBlankCard());
+
+        gameComponent.accessCutCard().removeAll();
+        gameComponent.accessCutCard().add(cutCard);
+
         repaint();
 
     }

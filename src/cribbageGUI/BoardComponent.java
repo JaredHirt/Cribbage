@@ -8,8 +8,15 @@ public class BoardComponent extends JComponent {
     public BoardComponent(ImageIcon board){
         super();
         setLayout(new BorderLayout());
-        this.board = new JLabel(board);
+        this.board = new JLabel(board, JLabel.RIGHT);
         add(this.board);
+        setSize(board.getIconWidth(), board.getIconHeight());
+        setBackground(Color.blue);
         setVisible(true);
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+        add(board);
     }
 }

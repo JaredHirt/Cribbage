@@ -25,8 +25,6 @@ public class Card extends JButton implements Comparable<Card>{
         this.rank = rank;
         this.suit = suit;
         setIcon(new ImageIcon(new ImageIcon("src/CribbageGUI_Images/Cards/"+toString()+".png").getImage().getScaledInstance(80, 150, Image.SCALE_SMOOTH)));
-
-
     }
 
     /**
@@ -113,6 +111,12 @@ public class Card extends JButton implements Comparable<Card>{
     @Override
     public int compareTo(Card a){
         return Integer.compare(this.rank.ordinal(), a.rank.ordinal());
+    }
+
+    public static Card getBlankCard(){
+        Card tempCard = getCard(0);
+        tempCard.setIcon(new ImageIcon(new ImageIcon("src/CribbageGUI_Images/Cards/Card_Back.png").getImage().getScaledInstance(80, 150, Image.SCALE_SMOOTH)));
+        return tempCard;
     }
 
 

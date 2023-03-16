@@ -9,7 +9,8 @@ public class CribbageFrame extends JFrame {
     private Controller controller;
     public CribbageFrame(){
         super("Team Frappuccino Cribbage");
-        setSize(800, 800);
+        setLayout(new BorderLayout());
+        setSize(1600, 1200);
         setLocation(100, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

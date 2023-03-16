@@ -40,6 +40,7 @@ public class Game {
         Player dealer = null;
         Player swap;
         cardsPegged = new ArrayList<>();
+        findDealer();
     }
 
     public void findDealer(){
@@ -107,8 +108,5 @@ public class Game {
 
     public Player getPlayer(){return player;}
     public AI getAi(){return ai;}
-
-    public void drawState(){
-        controller.drawState();
-    }
+    public ArrayList<Card> getPeggedCards(){return cardsPegged;}
 }
