@@ -104,7 +104,11 @@ public class Game {
         }
 
     }
-    public void setController(Controller control){controller = control;}
+    public void setController(Controller control){
+        controller = control;
+        player.setController(control);
+        ai.setController(control);
+    }
 
     public Player getPlayer(){return player;}
     public AI getAi(){return ai;}

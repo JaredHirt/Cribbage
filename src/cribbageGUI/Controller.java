@@ -48,7 +48,7 @@ public class Controller {
 
         gameComponent.accessPeggedCards().removeAll();
         for(Card c: game.getPeggedCards())
-            gameComponent.accessPeggedCards().add(Card.getBlankCard());
+            gameComponent.accessPeggedCards().add(c);
 
         gameComponent.accessCutCard().removeAll();
         gameComponent.accessCutCard().add(cutCard);
@@ -86,6 +86,8 @@ public class Controller {
         //Gives two points to dealer for "his knees"
         if(cutCard.getRank() == Rank.Jack)
             game.getDealer().increaseScore(2);
+        drawState();
+        game.getPlayer().playCard(game.getPeggedCards());
         drawState();
     }
 }
