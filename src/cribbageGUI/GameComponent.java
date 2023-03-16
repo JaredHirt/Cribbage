@@ -38,11 +38,11 @@ public class GameComponent extends JComponent{
         cutCard.setLayout(new BorderLayout());
         cribBoard.setLayout(new BorderLayout());
         info.setLayout(new BorderLayout());
-        info.setBackground(Color.GREEN);
+        info.setBackground(Color.ORANGE);
         setOpaque(true);
 
         GridBagConstraints oppCards = new GridBagConstraints();
-        oppCards.gridx = 1;
+        oppCards.gridx = 0;
         oppCards.gridy = 0;
         oppCards.gridwidth = 3;
         oppCards.gridheight = 1;
@@ -51,7 +51,7 @@ public class GameComponent extends JComponent{
         add(opponentCards, oppCards);
 
         GridBagConstraints pegCards = new GridBagConstraints();
-        pegCards.gridx = 1;
+        pegCards.gridx = 0;
         pegCards.gridy = 1;
         pegCards.gridwidth = 3;
         pegCards.gridheight = 1;
@@ -59,7 +59,7 @@ public class GameComponent extends JComponent{
         add(peggedCards, pegCards);
 
         GridBagConstraints playerCards = new GridBagConstraints();
-        playerCards.gridx = 1;
+        playerCards.gridx = 0;
         playerCards.gridy = 2;
         playerCards.gridwidth = 3;
         playerCards.gridheight = 1;
@@ -68,28 +68,29 @@ public class GameComponent extends JComponent{
         add(yourCards, playerCards);
 
         GridBagConstraints cardCut = new GridBagConstraints();
-        cardCut.gridx = 4;
-        cardCut.gridy = 2;
+        cardCut.gridx = 3;
+        cardCut.gridy = 1;
         cardCut.gridwidth = 1;
         cardCut.gridheight = 1;
         cardCut.weightx = 0;
+        cardCut.weighty = 0;
         add(cutCard, cardCut);
 
         GridBagConstraints board = new GridBagConstraints();
         board.gridx = 4;
         board.gridy = 0;
         board.gridwidth = 1;
-        board.gridheight = 2;
+        board.gridheight = 3;
         playerCards.weightx = 0.5;
         playerCards.weighty = 1;
         add(cribBoard, board);
 
         GridBagConstraints infoPane = new GridBagConstraints();
-        infoPane.gridx = 4;
-        infoPane.gridy = 3;
+        infoPane.gridx = 3;
+        infoPane.gridy = 2;
         infoPane.gridwidth = 1;
         infoPane.gridheight = 1;
-        infoPane.anchor = GridBagConstraints.NORTHWEST;
+
         add(info, infoPane);
 
     }

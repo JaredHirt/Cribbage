@@ -19,8 +19,17 @@ public class ScoreComponent extends JComponent {
     public ScoreComponent(int playerPoints, int aiPoints){
         super();
         setLayout(new BorderLayout());
+        setBorder(BorderFactory.createRaisedBevelBorder());
+
         playerScore = new JLabel();
         computerScore = new JLabel();
+        playerScore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        playerScore.setOpaque(true);
+        computerScore.setOpaque(true);
+        playerScore.setBackground(Color.BLACK);
+        computerScore.setBackground(Color.BLACK);
+        playerScore.setForeground(Color.BLUE);
+        computerScore.setForeground(Color.RED);
 
         setPlayerScore(playerPoints);
         setComputerScore(aiPoints);
