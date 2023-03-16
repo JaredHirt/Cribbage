@@ -3,6 +3,7 @@ package cribbageGUI;
 import javax.swing.*;
 import deck.Card;
 import deck.Rank;
+import game.Game;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,11 @@ public class Controller {
         //Turn this game component into the actual game, draw the cribbage board, set the pegs to 0
         GameComponent gameComponent = new GameComponent();
         newRound();
+    }
+
+    public void restartGame(StartGameButton buttonToRemove){
+        game = new Game();
+        startTheGame(buttonToRemove);
     }
 
     /**

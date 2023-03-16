@@ -31,7 +31,7 @@ public class Main {
         CribbageFrame frame = new CribbageFrame();
 
         // Create the start game button and add it to the frame
-        StartGameButton startGameButton = new StartGameButton(new ImageIcon("src/CribbageGUI_Images/Buttons/StartGameButton.png"));
+        StartGameButton startGameButton = new StartGameButton();
         startGameButton.setBorder(BorderFactory.createEmptyBorder());
 
         // Create the game component and the game controller

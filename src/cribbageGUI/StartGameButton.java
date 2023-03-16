@@ -14,10 +14,10 @@ public class StartGameButton extends JButton implements ActionListener {
     /**
      * Creates a new StartGameButton with the specified image icon.
      *
-     * @param img the image icon to be displayed on the button
+
      */
-    public StartGameButton(ImageIcon img){
-        this.setIcon(img);
+    public StartGameButton(){
+        this.setIcon(new ImageIcon("src/CribbageGUI_Images/Buttons/StartGameButton.png"));
         setBackground(new Color(102,50,0));
         addActionListener(this);
     }
