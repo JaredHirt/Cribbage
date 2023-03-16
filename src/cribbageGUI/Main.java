@@ -38,6 +38,7 @@ public class Main {
         GameComponent gameComponent = new GameComponent();
         Game game = new Game();
         Controller controller = new Controller(frame, gameComponent, startGameButton, game);
+        game.setController(controller);
         frame.add(startGameButton, BorderLayout.CENTER);
 
 

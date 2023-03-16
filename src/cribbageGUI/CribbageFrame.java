@@ -18,7 +18,7 @@ public class CribbageFrame extends JFrame {
         super("Team Frappuccino Cribbage");
         setLayout(new BorderLayout());
         setBackground(new Color(102, 51, 0));
-        setSize(1600, 1200);
+        setSize(800, 600);
         setLocation(100, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

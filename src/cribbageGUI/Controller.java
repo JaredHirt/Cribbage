@@ -5,6 +5,7 @@ import deck.Card;
 import deck.Rank;
 import game.Game;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -49,9 +50,14 @@ public class Controller {
         newRound();
     }
 
-    public void restartGame(StartGameButton buttonToRemove){
-        game = new Game();
-        startTheGame(buttonToRemove);
+    public void restartGame(RestartGameButton buttonToRemove){
+        frame.remove(buttonToRemove);
+        frame.add(gameComponent);
+        repaint();
+        game.getAi().setScore(0);
+        game.getPlayer().setScore(0);
+        game.getDealer();
+        newRound();
     }
 
     /**
@@ -200,10 +206,9 @@ public class Controller {
 
     public void restart(){
         RestartGameButton restartGameButton = new RestartGameButton();
-        restartGameButton.setController(new Controller(frame, gameComponent,restartGameButton, game));
-        frame.add(restartGameButton);
-        frame.revalidate();
-        frame.repaint();
+        restartGameButton.setController(this);
+        frame.remove(gameComponent);
+        frame.add(restartGameButton, BorderLayout.SOUTH);
     }
 }
 
