@@ -259,4 +259,5 @@ public class Player {
      * @param pegCard sets the pegging cards
      */
     public void setPeggingCards(ArrayList<Card> pegCard){peggingCards = pegCard;}
+    public Card getCutCard(){return myHand.getCutCard();}
 }

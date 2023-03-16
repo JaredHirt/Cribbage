@@ -108,5 +108,7 @@ public class Game {
 
     public Player getPlayer(){return player;}
     public AI getAi(){return ai;}
+    public Player getDealer(){return dealer;}
+    public Player getPone(){return pone;}
     public ArrayList<Card> getPeggedCards(){return cardsPegged;}
 }

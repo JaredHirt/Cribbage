@@ -14,7 +14,7 @@ public class GameComponent extends JComponent{
     private CardPanel yourCards;
     private JPanel cribBoard;
     private CardPanel cutCard;
-    private JPanel info;
+    private ScoreComponent info;
 
     public GameComponent(){
         super();
@@ -25,11 +25,12 @@ public class GameComponent extends JComponent{
         yourCards = new CardPanel();
         cribBoard = new JPanel();
         cutCard = new CardPanel();
-        info = new JPanel();
+        info = new ScoreComponent(0, 0);
 
         cutCard.setLayout(new BorderLayout());
         cribBoard.setLayout(new BorderLayout());
         info.setLayout(new BorderLayout());
+        info.setBackground(Color.GREEN);
 
 
         GridBagConstraints oppCards = new GridBagConstraints();
@@ -91,7 +92,7 @@ public class GameComponent extends JComponent{
     public CardPanel accessYourCards(){return yourCards;}
     public JComponent accessBoard(){return cribBoard;}
     public CardPanel accessCutCard(){return cutCard;}
-    public JComponent accessInfo(){return info;}
+    public ScoreComponent accessInfo(){return info;}
 
 
 }

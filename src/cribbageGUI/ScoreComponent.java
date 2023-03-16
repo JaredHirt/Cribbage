@@ -6,14 +6,14 @@ import java.awt.*;
 public class ScoreComponent extends JComponent {
     private JLabel playerScore;
     private JLabel computerScore;
-    public ScoreComponent(){
+    public ScoreComponent(int playerPoints, int aiPoints){
         super();
         setLayout(new BorderLayout());
         playerScore = new JLabel();
         computerScore = new JLabel();
 
-        setPlayerScore(0);
-        setComputerScore(0);
+        setPlayerScore(playerPoints);
+        setComputerScore(aiPoints);
 
         add(playerScore, BorderLayout.NORTH);
         add(computerScore, BorderLayout.SOUTH);

@@ -1,6 +1,7 @@
 package cribbageGUI;
 import javax.swing.*;
 import deck.Card;
+import deck.Rank;
 
 
 public class Controller {
@@ -53,7 +54,8 @@ public class Controller {
         gameComponent.accessCutCard().add(cutCard);
 
         gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/Buttons/PotentialCribBoard.png")));
-        gameComponent.accessInfo().add(new ScoreComponent());
+        gameComponent.accessInfo().removeAll();
+        gameComponent.accessInfo().add(new ScoreComponent(game.getPlayer().getScore(), game.getAi().getScore()));
 
         repaint();
 
@@ -71,7 +73,20 @@ public class Controller {
                 game.getPlayer().getTheCrib().getHand().add(card);
                 c.removeAllActionListeners();
                 drawState();
+                if(game.getPlayer().getPeggingCards().size() == 4){
+                    for(Card ca : game.getPlayer().getPeggingCards())
+                        ca.removeAllActionListeners();
+                    game.getAi().discard();
+                    newPeggingRound();
+                }
                     });
+    }
+    public void newPeggingRound(){
+        cutCard = game.getPlayer().getCutCard();
+        //Gives two points to dealer for "his knees"
+        if(cutCard.getRank() == Rank.Jack)
+            game.getDealer().increaseScore(2);
+        drawState();
     }
 }
 
