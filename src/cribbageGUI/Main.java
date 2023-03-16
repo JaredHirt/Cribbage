@@ -8,10 +8,11 @@ import java.awt.*;
 public class
 Main {
     public static void main(String[] args) {
-
+        game = new Game();
         SwingUtilities.invokeLater(
                 () -> startGUI()
             );
+
     }
 
     private static void startGUI(){

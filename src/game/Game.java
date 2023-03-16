@@ -14,6 +14,7 @@ import deck.Card;
 import deck.Rank;
 import player.Player;
 import player.AI;
+import java.util.concurrent.CountDownLatch;
 
 
 import java.util.ArrayList;
@@ -22,21 +23,22 @@ import java.util.Arrays;
 public class Game {
     private boolean gameStarted;
     private Controller controller;
+    private CountDownLatch countDownLatch;
+    private Player player;
+    private AI ai;
+
     public void playGame() throws InterruptedException {
-        gameStarted = false;
+        countDownLatch = new CountDownLatch(1);
+
         cribbageGUI.Controller control = controller;
         //Setting up the game
         //Makes the thread sleep until gameStarted becomes true
-        try {
-            wait();
-        } catch (InterruptedException e){
-
-        }
+        countDownLatch.await();
 
         controller.repaint();
         Deck theDeck = new Deck();
-        Player player = new Player();
-        AI ai = new AI();
+        player = new Player();
+        ai = new AI();
 
         Player pone = null;
         Player dealer = null;
@@ -133,6 +135,9 @@ public class Game {
     }
     public void setController(Controller control){controller = control;}
     public void startGame(){
-        gameStarted = true;
+        countDownLatch.countDown();
     }
+
+    public Player getPlayer(){return player;}
+    public AI getAi(){return ai;}
 }
