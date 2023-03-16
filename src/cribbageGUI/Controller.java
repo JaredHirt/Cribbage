@@ -90,5 +90,42 @@ public class Controller {
         game.getPlayer().playCard(game.getPeggedCards());
         drawState();
     }
+
+    public void passPeggingToAI(){
+        if(game.getAi().canPlayCard(game.getPeggedCards()))
+            game.getAi().playCard(game.getPeggedCards());
+        else if(game.getPlayer().canPlayCard(game.getPeggedCards()))
+            game.getPlayer().playCard(game.getPeggedCards());
+        else if(!game.getPlayer().canPlayCard(game.getPeggedCards()) && !game.getAi().canPlayCard(game.getPeggedCards())){
+            System.out.println("Round reset");
+            game.getPlayer().increaseScore(1);
+            game.getPeggedCards().clear();
+            drawState();
+            if(game.getPlayer().getPeggingCards().size() == 0 && game.getAi().getPeggingCards().size() == 0)
+                peggingDone();
+            else game.getAi().playCard(game.getPeggedCards());
+        }
+
+    }
+
+    public void passPeggingtoPlayer() {
+        if (game.getPlayer().canPlayCard(game.getPeggedCards()))
+            game.getPlayer().playCard(game.getPeggedCards());
+        else if (game.getAi().canPlayCard(game.getPeggedCards()))
+            game.getAi().playCard(game.getPeggedCards());
+        else if (!game.getAi().canPlayCard(game.getPeggedCards()) && !game.getPlayer().canPlayCard(game.getPeggedCards())) {
+            System.out.println("Round reset");
+            game.getAi().increaseScore(1);
+            game.getPeggedCards().clear();
+            drawState();
+            if(game.getPlayer().getPeggingCards().size() == 0 && game.getAi().getPeggingCards().size() == 0)
+                peggingDone();
+            else game.getPlayer().playCard(game.getPeggedCards());
+        }
+
+    }
+    public void peggingDone(){
+        System.out.println("Pegging done");
+    }
 }
 

@@ -22,7 +22,7 @@ public class Player {
     private ArrayList<Card> peggingCards;
     private static final Crib theCrib = new Crib();
     private final Scanner kbd = new Scanner(System.in);
-    private Controller controller;
+    Controller controller;
 
     /**
      * Player constructor
@@ -228,6 +228,7 @@ public class Player {
     }
 
     public void playCard(ArrayList<Card> peggedCards){
+        controller.drawState();
         for(Card c:peggingCards){
             if(canPlayCard(peggedCards, c))
                 c.addActionListener(ae -> {
@@ -236,10 +237,9 @@ public class Player {
                             peggingCards.remove(c);
                             peggedCards.add(c);
                             increaseScore(Counting.pointsPegging(peggedCards));
-
                             controller.drawState();
-                            playCard(peggedCards);
-
+                            System.out.println("Card Played");
+                            controller.passPeggingToAI();
                         });
         }
     }

@@ -83,7 +83,9 @@ public class AI extends Player{
 
         pegCard(peggedCards, cardToPeg);
         super.outputPeggedCards(peggedCards);
-
+        controller.drawState();
+        increaseScore(Counting.pointsPegging(peggedCards));
+        controller.passPeggingtoPlayer();
     }
 
     /**
