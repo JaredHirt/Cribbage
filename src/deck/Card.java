@@ -27,6 +27,9 @@ public class Card extends JButton implements Comparable<Card>{
         this.rank = rank;
         this.suit = suit;
         setIcon(new ImageIcon(new ImageIcon("src/CribbageGUI_Images/Cards/"+toString()+".png").getImage().getScaledInstance(80, 150, Image.SCALE_SMOOTH)));
+        setContentAreaFilled(false);
+        setOpaque(true);
+        setBackground(Color.gray);
     }
 
     /**

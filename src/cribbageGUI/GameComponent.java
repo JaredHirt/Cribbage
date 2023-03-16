@@ -31,7 +31,7 @@ public class GameComponent extends JComponent{
         cribBoard.setLayout(new BorderLayout());
         info.setLayout(new BorderLayout());
         info.setBackground(Color.GREEN);
-
+        setOpaque(true);
 
         GridBagConstraints oppCards = new GridBagConstraints();
         oppCards.gridx = 1;

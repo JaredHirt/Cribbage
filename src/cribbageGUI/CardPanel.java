@@ -10,6 +10,8 @@ public class CardPanel extends JPanel {
     private ArrayList<Card> cardsToDraw;
     public CardPanel(){
         cardsToDraw = new ArrayList<Card>();
+        setBackground(new Color(53,101,77));
+        setBorder(BorderFactory.createRaisedBevelBorder());
     }
 
     @Override
