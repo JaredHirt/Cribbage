@@ -3,6 +3,8 @@ import javax.swing.*;
 import deck.Card;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Controller {
     private CribbageFrame frame;
@@ -30,12 +32,6 @@ public class Controller {
         GameComponent gameComponent = new GameComponent();
         gameComponent.accessCutCard().add(Card.getCard(5));
 
-        gameComponent.accessYourCards().add(Card.getCard(1));
-        gameComponent.accessYourCards().add(Card.getCard(2));
-        gameComponent.accessYourCards().add(Card.getCard(3));
-        gameComponent.accessYourCards().add(Card.getCard(4));
-        gameComponent.accessYourCards().add(Card.getCard(5));
-        gameComponent.accessYourCards().add(Card.getCard(6));
 
         gameComponent.accessOpponentCards().add(Card.getCard(1));
         gameComponent.accessOpponentCards().add(Card.getCard(2));
@@ -53,32 +49,33 @@ public class Controller {
         gameComponent.accessPeggedCards().add(Card.getCard(29));
         gameComponent.accessPeggedCards().add(Card.getCard(30));
 
+        gameComponent.accessYourCards().add(new JButton("hello"));
+
         gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/Buttons/PotentialCribBoard.png")));
 
         frame.add(gameComponent);
-        repaint();
-        frame.pack();
-        System.out.println("hello");
+
+
         startGame();
 
     }
 
     public void repaint(){
+        SwingUtilities.updateComponentTreeUI(frame);
+        frame.invalidate();
+        frame.validate();
         frame.repaint();
-        frame.revalidate();
+
     }
 
     public void startGame(){
-        game.startGame();
+        game.gameStarted();
     }
 
     public void drawState(){
-        gameComponent.accessOpponentCards().removeAll();
-        gameComponent.accessYourCards().removeAll();
-        gameComponent.accessPeggedCards().removeAll();
-        for(Card i: game.getPlayer().getPeggingCards()){
+        gameComponent.accessYourCards().setCardsToDraw(game.getPlayer().getPeggingCards());
+        gameComponent.accessYourCards().paint
 
-        }
     }
 }
 

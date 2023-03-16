@@ -14,6 +14,7 @@ import deck.Card;
 import deck.Rank;
 import player.Player;
 import player.AI;
+import javax.swing.*;
 import java.util.concurrent.CountDownLatch;
 
 
@@ -29,17 +30,18 @@ public class Game {
 
 
     public void playGame() throws InterruptedException{
-        //Setting up the game
-
-        //Makes the thread sleep until countDownLatch finishes
+        //Waiting for button
         countDownLatch = new CountDownLatch(1);
         countDownLatch.await();
 
 
+
+
+        //Setting up the game
+
         cribbageGUI.Controller control = controller;
-
-
         controller.repaint();
+        System.out.println("hi");
         Deck theDeck = new Deck();
         player = new Player();
         ai = new AI();
@@ -87,6 +89,8 @@ public class Game {
 
             dealer.setCutCard(dealtCards[12]);
             pone.setCutCard(dealtCards[12]);
+
+            drawState();
 
             //The cards are now all dealt
 
@@ -138,12 +142,15 @@ public class Game {
 
     }
     public void setController(Controller control){controller = control;}
-    public void startGame(){
-        gameStarted = true;
-        countDownLatch.countDown();
-        System.out.println("heard");
-    }
 
     public Player getPlayer(){return player;}
     public AI getAi(){return ai;}
+
+    public void gameStarted(){
+        countDownLatch.countDown();
+    }
+
+    public void drawState(){
+        controller.drawState();
+    }
 }

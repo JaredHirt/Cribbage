@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class GameComponent extends JComponent{
     private Controller controller;
-    private JPanel opponentCards;
-    private JPanel peggedCards;
-    private JPanel yourCards;
+    private CardPanel opponentCards;
+    private CardPanel peggedCards;
+    private CardPanel yourCards;
     private JPanel cribBoard;
     private JPanel cutCard;
     private JPanel info;
@@ -20,9 +20,9 @@ public class GameComponent extends JComponent{
         super();
         setLayout(new GridBagLayout());
 
-        opponentCards = new JPanel();
-        peggedCards = new JPanel();
-        yourCards = new JPanel();
+        opponentCards = new CardPanel();
+        peggedCards = new CardPanel();
+        yourCards = new CardPanel();
         cribBoard = new JPanel();
         cutCard = new JPanel();
         info = new JPanel();
@@ -86,11 +86,15 @@ public class GameComponent extends JComponent{
 
     }
     public void setController(Controller control){controller = control;}
-    public JPanel accessOpponentCards(){return opponentCards;}
-    public JPanel accessPeggedCards(){return peggedCards;}
-    public JPanel accessYourCards(){return yourCards;}
+    public CardPanel accessOpponentCards(){return opponentCards;}
+    public CardPanel accessPeggedCards(){return peggedCards;}
+    public CardPanel accessYourCards(){return yourCards;}
     public JComponent accessBoard(){return cribBoard;}
     public JComponent accessCutCard(){return cutCard;}
     public JComponent accessInfo(){return info;}
+
+    public void addCardToYourHand(Card c){
+        yourCards.add(c);
+    }
 
 }

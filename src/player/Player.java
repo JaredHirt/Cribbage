@@ -32,7 +32,7 @@ public class Player {
      * Sets the hand to an arraylist of Cards
      * @param cards the array list of cards which you want to set the hand to
      */
-    public void setHand(ArrayList<Card> cards){myHand.setHand(cards);}
+    public void setHand(ArrayList<Card> cards){myHand.setHand(cards); peggingCards = new ArrayList<>(myHand.getHand());}
 
     /**
      * Sets the cut card
