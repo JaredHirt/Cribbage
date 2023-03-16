@@ -140,7 +140,7 @@ public class Player {
     /**
      * Discards cards from the hand until the player has two cards remaining
      */
-    public void discard(){
+    public void discardTerminal(){
         String cardStringToRemove;
         Card cardToRemove = null;
 
@@ -161,6 +161,16 @@ public class Player {
 
         }
         peggingCards = new ArrayList<>(myHand.getHand());
+    }
+
+    public void discard(){
+        for(Card c: peggingCards){
+            c.addActionListener(ae -> {
+                getHand().getHand().remove(c);
+                getPeggingCards().remove(c);
+                getTheCrib().getHand().add(c);
+            });
+        }
     }
 
     /**

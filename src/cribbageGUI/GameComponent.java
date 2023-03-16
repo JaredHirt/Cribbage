@@ -60,12 +60,10 @@ public class GameComponent extends JComponent{
 
         GridBagConstraints cardCut = new GridBagConstraints();
         cardCut.gridx = 4;
-        cardCut.gridy = 1;
+        cardCut.gridy = 2;
         cardCut.gridwidth = 1;
         cardCut.gridheight = 1;
         cardCut.weightx = 0;
-        cardCut.anchor = GridBagConstraints.EAST;
-        cardCut.fill = GridBagConstraints.BOTH;
         add(cutCard, cardCut);
 
         GridBagConstraints board = new GridBagConstraints();
@@ -74,13 +72,12 @@ public class GameComponent extends JComponent{
         board.gridwidth = 1;
         board.gridheight = 2;
         playerCards.weightx = 0.5;
-        playerCards.weighty = 0.5;
-        board.anchor = GridBagConstraints.WEST;
+        playerCards.weighty = 1;
         add(cribBoard, board);
 
         GridBagConstraints infoPane = new GridBagConstraints();
         infoPane.gridx = 4;
-        infoPane.gridy = 2;
+        infoPane.gridy = 3;
         infoPane.gridwidth = 1;
         infoPane.gridheight = 1;
         infoPane.anchor = GridBagConstraints.NORTHWEST;

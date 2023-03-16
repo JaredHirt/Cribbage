@@ -8,6 +8,8 @@
 package deck;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.EventListener;
 
 
 public class Card extends JButton implements Comparable<Card>{
@@ -117,6 +119,12 @@ public class Card extends JButton implements Comparable<Card>{
         Card tempCard = getCard(0);
         tempCard.setIcon(new ImageIcon(new ImageIcon("src/CribbageGUI_Images/Cards/Card_Back.png").getImage().getScaledInstance(80, 150, Image.SCALE_SMOOTH)));
         return tempCard;
+    }
+
+    public void removeAllActionListeners(){
+        ActionListener[] listeners = this.getActionListeners();
+        for(ActionListener i: listeners)
+            removeActionListener(i);
     }
 
 

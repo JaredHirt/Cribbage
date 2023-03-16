@@ -26,23 +26,13 @@ public class Controller {
         frame.remove(buttonToRemove);
         //Turn this game component into the actual game, draw the cribbage board, set the pegs to 0
         GameComponent gameComponent = new GameComponent();
-        game.deal();
-        cutCard = Card.getBlankCard();
-        gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/Buttons/PotentialCribBoard.png")));
-        gameComponent.accessInfo().add(new ScoreComponent());
-
-        frame.add(gameComponent);
-
-        drawState();
-        drawState();
-        frame.revalidate();
+        newRound();
     }
 
     public void repaint(){
+        frame.add(gameComponent);
         frame.revalidate();
         frame.repaint();
-        frame.add(gameComponent);
-        frame.pack();
 
     }
 
@@ -56,14 +46,32 @@ public class Controller {
             gameComponent.accessOpponentCards().add(Card.getBlankCard());
 
         gameComponent.accessPeggedCards().removeAll();
-        for(Card c: game.getPlayer().getPeggingCards())
+        for(Card c: game.getPeggedCards())
             gameComponent.accessPeggedCards().add(Card.getBlankCard());
 
         gameComponent.accessCutCard().removeAll();
         gameComponent.accessCutCard().add(cutCard);
 
+        gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/CribbageGUI_Images/Buttons/PotentialCribBoard.png")));
+        gameComponent.accessInfo().add(new ScoreComponent());
+
         repaint();
 
+    }
+
+    public void newRound(){
+        game.deal();
+        cutCard = Card.getBlankCard();
+        drawState();
+        for(Card c:game.getPlayer().getPeggingCards())
+            c.addActionListener(ae-> {
+                Card card = (Card)ae.getSource();
+                game.getPlayer().getHand().getHand().remove(card);
+                game.getPlayer().getPeggingCards().remove(card);
+                game.getPlayer().getTheCrib().getHand().add(card);
+                c.removeAllActionListeners();
+                drawState();
+                    });
     }
 }
 
