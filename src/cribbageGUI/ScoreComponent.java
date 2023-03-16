@@ -21,9 +21,12 @@ public class ScoreComponent extends JComponent {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createRaisedBevelBorder());
 
+        setFont(new Font("MENLO", Font.BOLD, 24));
         playerScore = new JLabel();
         computerScore = new JLabel();
         playerScore.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        playerScore.setFont(new Font("MENLO", Font.BOLD, 24));
+        computerScore.setFont(new Font("MENLO", Font.BOLD, 24));
         playerScore.setOpaque(true);
         computerScore.setOpaque(true);
         playerScore.setBackground(Color.BLACK);

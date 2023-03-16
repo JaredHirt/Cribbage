@@ -38,7 +38,7 @@ public class GameComponent extends JComponent{
         cutCard.setLayout(new BorderLayout());
         cribBoard.setLayout(new BorderLayout());
         info.setLayout(new BorderLayout());
-        info.setBackground(Color.ORANGE);
+        info.setBackground(Color.DARK_GRAY);
         setOpaque(true);
 
         GridBagConstraints oppCards = new GridBagConstraints();
@@ -83,6 +83,7 @@ public class GameComponent extends JComponent{
         board.gridheight = 3;
         playerCards.weightx = 0.5;
         playerCards.weighty = 1;
+        board.insets = new Insets(0,20,0,20);
         add(cribBoard, board);
 
         GridBagConstraints infoPane = new GridBagConstraints();
@@ -90,6 +91,8 @@ public class GameComponent extends JComponent{
         infoPane.gridy = 2;
         infoPane.gridwidth = 1;
         infoPane.gridheight = 1;
+        infoPane.anchor = GridBagConstraints.NORTH;
+        infoPane.insets = new Insets(10,0,0,0);
 
         add(info, infoPane);
 
@@ -100,7 +103,6 @@ public class GameComponent extends JComponent{
      * @param control The controller to set.
      */
     public void setController(Controller control){controller = control;}
-
 
     /**
      * @return The opponent's card panel.

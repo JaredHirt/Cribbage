@@ -20,7 +20,7 @@ public class BoardComponent extends JComponent {
         setLayout(new BorderLayout());
         this.board = new JLabel(board, JLabel.RIGHT);
         setSize(board.getIconWidth(), board.getIconHeight());
-        this.board.setBorder(new EmptyBorder(20,20,20,20));
+        this.board.setBorder(BorderFactory.createRaisedBevelBorder());
         this.board.setBackground(new Color(102,50,0));
         this.board.setOpaque(true);
         setBackground(Color.blue);
