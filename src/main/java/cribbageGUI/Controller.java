@@ -97,6 +97,16 @@ public class Controller {
 
     }
 
+    public void drawHandCounting(){
+        gameComponent.accessCutCard().removeAll();
+        gameComponent.accessCutCard().add(cutCard);
+
+        gameComponent.accessBoard().add(new BoardComponent(new ImageIcon(getClass().getClassLoader().getResource("CribbageGUI_Images/Buttons/PotentialCribBoard.png"))));
+        gameComponent.accessInfo().removeAll();
+        gameComponent.accessInfo().add(new ScoreComponent(game.getPlayer().getScore(), game.getAi().getScore(), game.getDealer()));
+        repaint();
+    }
+
     /**
      * Starts a new round by dealing the cards and drawing the game state.
      */
@@ -200,17 +210,57 @@ public class Controller {
      * It then swaps the dealer and starts a new round.
      */
     public void peggingDone(){
+        showCountingOfHands();
+    }
+
+
+    public void showCountingOfHands(){
+        gameComponent.accessPeggedCards().removeAll();
         game.getPone().countHand();
+        for(Card c: game.getPone().getHand().getHand()) {
+            c.addActionListener(ae->
+            {
+                for(Card c1: game.getPone().getHand().getHand())
+                    c1.removeAllActionListeners();
+                showCountingOfDealer();
+            });
+            gameComponent.accessPeggedCards().add(c);
+            drawHandCounting();
+        }
+    }
+
+    public void showCountingOfDealer(){
+        gameComponent.accessPeggedCards().removeAll();
         game.getDealer().countHand();
+        for(Card c: game.getDealer().getHand().getHand()) {
+            c.addActionListener(ae->
+            {
+                for(Card c1: game.getDealer().getHand().getHand())
+                    c1.removeAllActionListeners();
+                showCountingOfCrib();
+            });
+            gameComponent.accessPeggedCards().add(c);
+            drawHandCounting();
+        }
+    }
+
+    public void showCountingOfCrib(){
+        gameComponent.accessPeggedCards().removeAll();
         game.getDealer().countCrib();
-        game.swapDealer();
-        newRound();
+        for(Card c: game.getDealer().getTheCrib().getHand()) {
+            c.addActionListener(ae->
+            {
+                for(Card c1: game.getDealer().getTheCrib().getHand())
+                    c1.removeAllActionListeners();
+                game.swapDealer();
+                newRound();
+            });
+            gameComponent.accessPeggedCards().add(c);
+            drawHandCounting();
+        }
     }
 
 
-    public void showCountingOfHand(ArrayList<Card> hand){
-
-    }
 
     public void restart(){
         RestartGameButton restartGameButton = new RestartGameButton();
