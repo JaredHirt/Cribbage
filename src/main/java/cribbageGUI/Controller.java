@@ -170,14 +170,21 @@ public class Controller {
         else if(!game.getPlayer().canPlayCard(game.getPeggedCards()) && !game.getAi().canPlayCard(game.getPeggedCards())){
             System.out.println("Round reset");
             game.getPlayer().increaseScore(1);
-            game.getPeggedCards().clear();
-            drawState();
-            if(game.getPlayer().getPeggingCards().size() == 0 && game.getAi().getPeggingCards().size() == 0)
-                peggingDone();
-            else game.getAi().playCard(game.getPeggedCards());
-        }
+            //Making JButton that can clear the board
+            JButton c = new JButton("Click to Clear");
+            c.addActionListener(ae -> {
+                game.getPeggedCards().clear();
+                    drawState();
+                    if(game.getPlayer().getPeggingCards().size() == 0 && game.getAi().getPeggingCards().size() == 0)
+                        peggingDone();
+                    else game.getAi().playCard(game.getPeggedCards());
+            });
+            gameComponent.accessPeggedCards().add(c);
+            drawHandCounting();
 
+        }
     }
+
 
     /**
 
@@ -194,11 +201,17 @@ public class Controller {
         else if (!game.getAi().canPlayCard(game.getPeggedCards()) && !game.getPlayer().canPlayCard(game.getPeggedCards())) {
             System.out.println("Round reset");
             game.getAi().increaseScore(1);
-            game.getPeggedCards().clear();
-            drawState();
-            if(game.getPlayer().getPeggingCards().size() == 0 && game.getAi().getPeggingCards().size() == 0)
-                peggingDone();
-            else game.getPlayer().playCard(game.getPeggedCards());
+            //Making JButton that can clear the board
+            JButton c = new JButton("Click to Clear");
+            c.addActionListener(ae -> {
+                game.getPeggedCards().clear();
+                    drawState();
+                    if(game.getPlayer().getPeggingCards().size() == 0 && game.getAi().getPeggingCards().size() == 0)
+                        peggingDone();
+                    else game.getPlayer().playCard(game.getPeggedCards());
+            });
+            gameComponent.accessPeggedCards().add(c);
+            drawHandCounting();
         }
 
     }
