@@ -85,7 +85,8 @@ public class Controller {
 
         gameComponent.accessPeggedCards().removeAll();
         for(Card c: game.getPeggedCards())
-            gameComponent.accessPeggedCards().add(c);
+            if(c != null)
+                gameComponent.accessPeggedCards().add(c);
 
         gameComponent.accessCutCard().removeAll();
         gameComponent.accessCutCard().add(cutCard);
