@@ -3,10 +3,10 @@ package cribbageGUI;
 import javax.swing.*;
 import deck.Card;
 import deck.Rank;
-import game.Game;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * The controller class for the Cribbage game.
@@ -103,6 +103,8 @@ public class Controller {
     public void newRound(){
         game.deal();
         cutCard = Card.getBlankCard();
+        AIDiscard dis= new AIDiscard();
+        dis.execute();
         drawState();
         for(Card c:game.getPlayer().getPeggingCards())
             c.addActionListener(ae-> {
@@ -115,7 +117,13 @@ public class Controller {
                 if(game.getPlayer().getPeggingCards().size() == 4){
                     for(Card ca : game.getPlayer().getPeggingCards())
                         ca.removeAllActionListeners();
-                    game.getAi().discard();
+                    try {
+                        dis.get();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    } catch (ExecutionException e) {
+                        throw new RuntimeException(e);
+                    }
                     newPeggingRound();
                 }
                     });
@@ -209,6 +217,18 @@ public class Controller {
         restartGameButton.setController(this);
         frame.remove(gameComponent);
         frame.add(restartGameButton, BorderLayout.SOUTH);
+    }
+
+    private class AIDiscard extends SwingWorker{
+        @Override
+        public Object doInBackground(){
+            game.getAi().discard();
+            return null;
+        }
+        @Override
+        public void done(){
+            drawState();
+        }
     }
 }
 

@@ -10,6 +10,8 @@ import cribbageGUI.Controller;
 import deck.Card;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import game.Counting;
 import hand.Crib;
@@ -117,11 +119,7 @@ public class AI extends Player{
                 subsetOfHand.remove(hand.get(i));
                 possibleDiscards.add(subsetOfHand);
             }
-        while(possibleDiscards.size() > 1){
-            if(countOfAllPossibleCutCards(possibleDiscards.get(0), hand) > countOfAllPossibleCutCards(possibleDiscards.get(1), hand))
-                possibleDiscards.remove(1);
-            else possibleDiscards.remove(0);
-        }
+        possibleDiscards.set(0, Collections.max(possibleDiscards, (Comparator.comparingInt(c -> countOfAllPossibleCutCards(c, hand)))));
         for(Card i: possibleDiscards.get(0))
             discards.remove(i);
 
