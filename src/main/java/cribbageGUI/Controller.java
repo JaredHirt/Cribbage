@@ -3,6 +3,7 @@ package cribbageGUI;
 import javax.swing.*;
 import deck.Card;
 import deck.Rank;
+import player.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -237,7 +238,9 @@ public class Controller {
                     c1.removeAllActionListeners();
                 showCountingOfDealer();
             });
-            gameComponent.accessPeggedCards().add(c);
+            if (game.getPone() instanceof player.AI)
+                gameComponent.accessOpponentCards().add(c);
+            else gameComponent.accessYourCards().add(c);
             drawHandCounting();
         }
     }
@@ -252,7 +255,9 @@ public class Controller {
                     c1.removeAllActionListeners();
                 showCountingOfCrib();
             });
-            gameComponent.accessPeggedCards().add(c);
+            if (game.getDealer() instanceof player.AI)
+                gameComponent.accessOpponentCards().add(c);
+            else gameComponent.accessYourCards().add(c);
             drawHandCounting();
         }
     }
