@@ -5,6 +5,6 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package deck;
+package main.java.deck;
 
 public enum Suit {Club, Diamond, Heart, Spade}

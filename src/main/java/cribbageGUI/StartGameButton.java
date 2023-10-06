@@ -1,4 +1,4 @@
-package cribbageGUI;
+package main.java.cribbageGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ public class StartGameButton extends JButton implements ActionListener {
 
      */
     public StartGameButton(){
-        this.setIcon(new ImageIcon(getClass().getClassLoader().getResource("CribbageGUI_Images/Buttons/StartGameButton.png")));
+        this.setIcon(new ImageIcon("src/main/resources/CribbageGUI_Images/Buttons/StartGameButton.png"));
         setBackground(new Color(102,50,0));
         addActionListener(this);
     }

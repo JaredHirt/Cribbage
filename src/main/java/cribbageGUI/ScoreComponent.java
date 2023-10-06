@@ -1,7 +1,7 @@
-package cribbageGUI;
+package main.java.cribbageGUI;
 
-import player.AI;
-import player.Player;
+import main.java.player.AI;
+import main.java.player.Player;
 
 import javax.swing.*;
 import java.awt.*;

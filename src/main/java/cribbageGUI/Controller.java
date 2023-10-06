@@ -1,12 +1,10 @@
-package cribbageGUI;
+package main.java.cribbageGUI;
 
 import javax.swing.*;
-import deck.Card;
-import deck.Rank;
-import player.Player;
+
+import main.java.deck.Rank;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -16,8 +14,8 @@ public class Controller {
     private final CribbageFrame frame;
     private final GameComponent gameComponent;
     private final StartGameButton startGameButton;
-    private final game.Game game;
-    private Card cutCard;
+    private final main.java.game.Game game;
+    private CardButton cutCard;
 
     /**
      * Creates a new instance of the Controller class.
@@ -27,7 +25,7 @@ public class Controller {
      * @param startGameButton the button used to start the game
      * @param game the Cribbage game instance
      */
-    public Controller(CribbageFrame frame, GameComponent gameComponent, StartGameButton startGameButton, game.Game game) {
+    public Controller(CribbageFrame frame, GameComponent gameComponent, StartGameButton startGameButton, main.java.game.Game game) {
         this.frame = frame;
         this.gameComponent = gameComponent;
         this.startGameButton = startGameButton;
@@ -76,22 +74,22 @@ public class Controller {
      */
     public void drawState(){
         gameComponent.accessYourCards().removeAll();
-        for(Card c: game.getPlayer().getPeggingCards())
+        for(CardButton c: game.getPlayer().getPeggingCards())
             gameComponent.accessYourCards().add(c);
 
         gameComponent.accessOpponentCards().removeAll();
-        for(Card c: game.getAi().getPeggingCards())
-            gameComponent.accessOpponentCards().add(Card.getBlankCard());
+        for(CardButton c: game.getAi().getPeggingCards())
+            gameComponent.accessOpponentCards().add(CardButton.getBlankCard());
 
         gameComponent.accessPeggedCards().removeAll();
-        for(Card c: game.getPeggedCards())
+        for(CardButton c: game.getPeggedCards())
             if(c != null)
                 gameComponent.accessPeggedCards().add(c);
 
         gameComponent.accessCutCard().removeAll();
         gameComponent.accessCutCard().add(cutCard);
 
-        gameComponent.accessBoard().add(new BoardComponent(new ImageIcon(getClass().getClassLoader().getResource("CribbageGUI_Images/Buttons/PotentialCribBoard.png"))));
+        gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/main/resources/CribbageGUI_Images/Buttons/PotentialCribBoard.png")));
         gameComponent.accessInfo().removeAll();
         gameComponent.accessInfo().add(new ScoreComponent(game.getPlayer().getScore(), game.getAi().getScore(), game.getDealer()));
 
@@ -103,7 +101,7 @@ public class Controller {
         gameComponent.accessCutCard().removeAll();
         gameComponent.accessCutCard().add(cutCard);
 
-        gameComponent.accessBoard().add(new BoardComponent(new ImageIcon(getClass().getClassLoader().getResource("CribbageGUI_Images/Buttons/PotentialCribBoard.png"))));
+        gameComponent.accessBoard().add(new BoardComponent(new ImageIcon("src/main/resources/CribbageGUI_Images/Buttons/PotentialCribBoard.png")));
         gameComponent.accessInfo().removeAll();
         gameComponent.accessInfo().add(new ScoreComponent(game.getPlayer().getScore(), game.getAi().getScore(), game.getDealer()));
         repaint();
@@ -114,20 +112,20 @@ public class Controller {
      */
     public void newRound(){
         game.deal();
-        cutCard = Card.getBlankCard();
+        cutCard = CardButton.getBlankCard();
         AIDiscard dis= new AIDiscard();
         dis.execute();
         drawState();
-        for(Card c:game.getPlayer().getPeggingCards())
+        for(CardButton c:game.getPlayer().getPeggingCards())
             c.addActionListener(ae-> {
-                Card card = (Card)ae.getSource();
+                CardButton card = (CardButton)ae.getSource();
                 game.getPlayer().getHand().getHand().remove(card);
                 game.getPlayer().getPeggingCards().remove(card);
                 game.getPlayer().getTheCrib().getHand().add(card);
                 c.removeAllActionListeners();
                 drawState();
                 if(game.getPlayer().getPeggingCards().size() == 4){
-                    for(Card ca : game.getPlayer().getPeggingCards())
+                    for(CardButton ca : game.getPlayer().getPeggingCards())
                         ca.removeAllActionListeners();
                     try {
                         dis.get();
@@ -232,14 +230,14 @@ public class Controller {
     public void showCountingOfHands(){
         gameComponent.accessPeggedCards().removeAll();
         game.getPone().countHand();
-        for(Card c: game.getPone().getHand().getHand()) {
+        for(CardButton c: game.getPone().getHand().getHand()) {
             c.addActionListener(ae->
             {
-                for(Card c1: game.getPone().getHand().getHand())
+                for(CardButton c1: game.getPone().getHand().getHand())
                     c1.removeAllActionListeners();
                 showCountingOfDealer();
             });
-            if (game.getPone() instanceof player.AI)
+            if (game.getPone() instanceof main.java.player.AI)
                 gameComponent.accessOpponentCards().add(c);
             else gameComponent.accessYourCards().add(c);
             drawHandCounting();
@@ -249,14 +247,14 @@ public class Controller {
     public void showCountingOfDealer(){
         gameComponent.accessPeggedCards().removeAll();
         game.getDealer().countHand();
-        for(Card c: game.getDealer().getHand().getHand()) {
+        for(CardButton c: game.getDealer().getHand().getHand()) {
             c.addActionListener(ae->
             {
-                for(Card c1: game.getDealer().getHand().getHand())
+                for(CardButton c1: game.getDealer().getHand().getHand())
                     c1.removeAllActionListeners();
                 showCountingOfCrib();
             });
-            if (game.getDealer() instanceof player.AI)
+            if (game.getDealer() instanceof main.java.player.AI)
                 gameComponent.accessOpponentCards().add(c);
             else gameComponent.accessYourCards().add(c);
             drawHandCounting();
@@ -266,10 +264,10 @@ public class Controller {
     public void showCountingOfCrib(){
         gameComponent.accessPeggedCards().removeAll();
         game.getDealer().countCrib();
-        for(Card c: game.getDealer().getTheCrib().getHand()) {
+        for(CardButton c: game.getDealer().getTheCrib().getHand()) {
             c.addActionListener(ae->
             {
-                for(Card c1: game.getDealer().getTheCrib().getHand())
+                for(CardButton c1: game.getDealer().getTheCrib().getHand())
                     c1.removeAllActionListeners();
                 game.swapDealer();
                 newRound();

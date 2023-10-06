@@ -1,6 +1,4 @@
-package cribbageGUI;
-
-import deck.Card;
+package main.java.cribbageGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,13 +8,13 @@ import java.util.ArrayList;
  * A panel to display the cards to be drawn.
  */
 public class CardPanel extends JPanel {
-    private ArrayList<Card> cardsToDraw;
+    private ArrayList<CardButton> cardsToDraw;
 
     /**
      * Constructs a new CardPanel object with default values.
      */
     public CardPanel(){
-        cardsToDraw = new ArrayList<Card>();
+        cardsToDraw = new ArrayList<CardButton>();
         setBackground(new Color(53,101,77));
         setBorder(BorderFactory.createRaisedBevelBorder());
     }
@@ -29,7 +27,7 @@ public class CardPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        for(Card i: cardsToDraw){
+        for(CardButton i: cardsToDraw){
             add(i);
         }
     }
@@ -39,7 +37,7 @@ public class CardPanel extends JPanel {
      *
      * @param c the ArrayList of Cards to be drawn.
      */
-    public void setCardsToDraw(ArrayList<Card> c){
+    public void setCardsToDraw(ArrayList<CardButton> c){
         cardsToDraw = new ArrayList<>(c);
     }
 }

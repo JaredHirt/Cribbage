@@ -1,12 +1,10 @@
-package cribbageGUI;
+package main.java.cribbageGUI;
 
 
-import deck.Card;
-import player.Player;
+import main.java.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
 

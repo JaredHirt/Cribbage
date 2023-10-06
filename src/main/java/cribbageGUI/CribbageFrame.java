@@ -1,6 +1,5 @@
-package cribbageGUI;
+package main.java.cribbageGUI;
 
-import deck.Card;
 import javax.swing.*;
 import java.awt.*;
 

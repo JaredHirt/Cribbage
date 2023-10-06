@@ -5,28 +5,30 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package deck;
+package main.java.deck;
+import main.java.cribbageGUI.CardButton;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    final ArrayList<Card> theCards;
+    final ArrayList<CardButton> theCards;
 
 
     public Deck(){
         theCards = new ArrayList<>();
         for(int i = 0; i < 52; i++)
-            theCards.add(Card.getCard(i));
+            theCards.add(CardButton.getCard(i));
     }
 
     /**
      * Returns a set amount of unique cards
      */
-    public Card[] returnUniqueCards(int numberOfCards){
+    public CardButton[] returnUniqueCards(int numberOfCards){
         //adding all possible numbers to an array list
         if(52 < numberOfCards || numberOfCards < 0)
-            return new Card[0];
-        Card [] uniqueCards = new Card[numberOfCards];
+            return new CardButton[0];
+        CardButton[] uniqueCards = new CardButton[numberOfCards];
         ArrayList<Integer> listOfNumbers = new ArrayList<>();
         for(int i = 0; i < 52; i++)
             listOfNumbers.add(i);

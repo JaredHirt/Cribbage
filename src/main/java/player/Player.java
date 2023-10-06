@@ -6,12 +6,13 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package player;
-import cribbageGUI.Controller;
-import game.Counting;
-import hand.Hand;
-import hand.Crib;
-import deck.Card;
+package main.java.player;
+import main.java.cribbageGUI.Controller;
+import main.java.deck.CardInterface;
+import main.java.game.Counting;
+import main.java.hand.Hand;
+import main.java.hand.Crib;
+import main.java.cribbageGUI.CardButton;
 import java.util.Scanner;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class Player {
     private int score;
     private final Hand myHand;
-    private ArrayList<Card> peggingCards;
+    private ArrayList<CardButton> peggingCards;
     private static final Crib theCrib = new Crib();
     private final Scanner kbd = new Scanner(System.in);
     Controller controller;
@@ -35,13 +36,13 @@ public class Player {
      * Sets the hand to an arraylist of Cards
      * @param cards the array list of cards which you want to set the hand to
      */
-    public void setHand(ArrayList<Card> cards){myHand.setHand(cards); peggingCards = new ArrayList<>(myHand.getHand());}
+    public void setHand(ArrayList<CardButton> cards){myHand.setHand(cards); peggingCards = new ArrayList<>(myHand.getHand());}
 
     /**
      * Sets the cut card
      * @param c the card which has been cut
      */
-    public void setCutCard(Card c){
+    public void setCutCard(CardButton c){
         myHand.setCutCard(c);
         theCrib.setCutCard(c);
     }
@@ -57,16 +58,16 @@ public class Player {
      * @param cardsPegged the arraylist of cards pegged
      * @return if there is a card you can play
      */
-    public boolean canPlayCard(ArrayList<Card> cardsPegged){
+    public boolean canPlayCard(ArrayList<CardButton> cardsPegged){
         if(howManyCardsInHand() == 0)
             return false;
         if(cardsPegged.size() == 0)
             return true;
         int peggingScore = 0;
-        for(Card i:cardsPegged)
+        for(CardButton i:cardsPegged)
             peggingScore += i.getCribCount();
 
-        for(Card i:peggingCards)
+        for(CardButton i:peggingCards)
             if(i.getRank().count() <= 31 - peggingScore)
                 return true;
         return false;
@@ -79,9 +80,9 @@ public class Player {
      * @param cardYouWantToPeg the card that you want to peg
      * @return if it is legal to peg that card
      */
-    public boolean canPlayCard(ArrayList<Card> cardsPegged, Card cardYouWantToPeg){
+    public boolean canPlayCard(ArrayList<CardButton> cardsPegged, CardButton cardYouWantToPeg){
         int peggingScore = 0;
-        for(Card i:cardsPegged)
+        for(CardButton i:cardsPegged)
             peggingScore += i.getCribCount();
         return (peggingScore + cardYouWantToPeg.getCribCount() <= 31);
     }
@@ -145,15 +146,15 @@ public class Player {
      */
     public void discardTerminal(){
         String cardStringToRemove;
-        Card cardToRemove = null;
+        CardButton cardToRemove = null;
 
         while(myHand.getHand().size() > 4) {
             System.out.print("\nCards in hand: ");
-            for(Card i: myHand.getHand())
+            for(CardButton i: myHand.getHand())
                 System.out.print(i + " ");
             System.out.println("\nPlease enter which card you would like to remove");
             cardStringToRemove = kbd.next();
-            for(Card i: myHand.getHand())
+            for(CardButton i: myHand.getHand())
                 if(i.toString().equalsIgnoreCase(cardStringToRemove))
                     cardToRemove = i;
             if(cardToRemove != null) {
@@ -167,7 +168,7 @@ public class Player {
     }
 
     public void discard(){
-        for(Card c: peggingCards){
+        for(CardButton c: peggingCards){
             c.addActionListener(ae -> {
                 getHand().getHand().remove(c);
                 getPeggingCards().remove(c);
@@ -196,26 +197,26 @@ public class Player {
      * Pegs a card
      * @param peggedCards the cards that have been pegged in this session
      */
-    public void playCardTerminal(ArrayList<Card> peggedCards){
+    public void playCardTerminal(ArrayList<CardButton> peggedCards){
         String stringCardToPeg;
-        Card cardToPeg = null;
+        CardButton cardToPeg = null;
         while(cardToPeg == null) {
             outputPeggedCards(peggedCards);
 
             System.out.print("\nCards you can use to peg: ");
-            for (Card i : peggingCards)
+            for (CardButton i : peggingCards)
                 System.out.print(i + " ");
 
             System.out.println("\nWhat card would you like to peg with?");
             stringCardToPeg = kbd.next();
             if(stringCardToPeg.length() == 1) {
-                for (Card i : peggingCards)
+                for (CardButton i : peggingCards)
                     if (i.toString().substring(0, 1).equalsIgnoreCase(stringCardToPeg))
                         if (canPlayCard(peggedCards, i))
                             cardToPeg = i;
             }
             else {
-                for (Card i : peggingCards)
+                for (CardButton i : peggingCards)
                     if (i.toString().equalsIgnoreCase(stringCardToPeg))
                         if (canPlayCard(peggedCards, i))
                             cardToPeg = i;
@@ -227,16 +228,17 @@ public class Player {
         }
     }
 
-    public void playCard(ArrayList<Card> peggedCards){
+    public void playCard(ArrayList<CardButton> peggedCards){
         controller.drawState();
-        for(Card c:peggingCards){
+        for(CardButton c:peggingCards){
             if(canPlayCard(peggedCards, c))
                 c.addActionListener(ae -> {
-                            for(Card ca:peggingCards)
+                            for(CardButton ca:peggingCards)
                                 ca.removeAllActionListeners();
                             peggingCards.remove(c);
                             peggedCards.add(c);
-                            increaseScore(Counting.pointsPegging(peggedCards));
+                            ArrayList<CardInterface>peggedCardsInterface = new ArrayList<>(peggedCards);
+                            increaseScore(Counting.pointsPegging(peggedCardsInterface));
                             controller.drawState();
                             System.out.println("Card Played");
                             controller.passPeggingToAI();
@@ -256,9 +258,9 @@ public class Player {
      * Outputs the pegged cards
      * @param peggedCards the pegged cards thus far
      */
-    public void outputPeggedCards(ArrayList<Card> peggedCards){
+    public void outputPeggedCards(ArrayList<CardButton> peggedCards){
         System.out.print("\nPegged Cards: ");
-            for (Card i : peggedCards)
+            for (CardButton i : peggedCards)
                 System.out.print(i + " ");
     }
 
@@ -272,14 +274,14 @@ public class Player {
      * Gets the pegging cards
      * @return returns the pegging cards
      */
-    public ArrayList<Card> getPeggingCards(){return peggingCards;}
+    public ArrayList<CardButton> getPeggingCards(){return peggingCards;}
 
     /**
      * Sets the pegging cards
      * @param pegCard sets the pegging cards
      */
-    public void setPeggingCards(ArrayList<Card> pegCard){peggingCards = pegCard;}
-    public Card getCutCard(){return myHand.getCutCard();}
+    public void setPeggingCards(ArrayList<CardButton> pegCard){peggingCards = pegCard;}
+    public CardButton getCutCard(){return myHand.getCutCard();}
     public void setController(Controller control){
         controller = control;
     }

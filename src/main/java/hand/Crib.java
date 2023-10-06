@@ -5,10 +5,13 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package hand;
+package main.java.hand;
 
-import deck.Card;
-import game.Counting;
+import main.java.cribbageGUI.CardButton;
+import main.java.deck.CardInterface;
+import main.java.game.Counting;
+
+import java.util.ArrayList;
 
 public class Crib extends Hand{
     public Crib(){
@@ -21,15 +24,17 @@ public class Crib extends Hand{
      */
     @Override
     public int count(){
+        ArrayList<CardInterface> handWithCutCard = new ArrayList<>(getHandWithCutCard());
+        ArrayList<CardInterface> hand = new ArrayList<>(getHand());
         int count = 0;
-        count += Counting.points15(getHandWithCutCard());
-        count += Counting.pointsPair(getHandWithCutCard());
-        count += Counting.flush(getHandWithCutCard());
-        count += Counting.knob(getHand(), getCutCard());
-        count += Counting.runs(getHandWithCutCard());
+        count += Counting.points15(handWithCutCard);
+        count += Counting.pointsPair(handWithCutCard);
+        count += Counting.flush(handWithCutCard);
+        count += Counting.knob(hand, getCutCard());
+        count += Counting.runs(handWithCutCard);
 
         System.out.print("\nThe Crib of ");
-        for(Card i: getHand())
+        for(CardButton i: getHand())
             System.out.print(i+ " ");
 
         System.out.println("with a cut card of " + getCutCard() + " scored " + count + " points");

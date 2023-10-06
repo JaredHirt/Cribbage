@@ -1,6 +1,6 @@
-package cribbageGUI;
+package main.java.cribbageGUI;
 
-import game.Game;
+import main.java.game.Game;
 
 import javax.swing.*;
 import java.awt.*;

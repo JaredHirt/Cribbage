@@ -5,10 +5,10 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package game;
+package main.java.game;
 
-import deck.Card;
-import deck.Rank;
+import main.java.deck.CardInterface;
+import main.java.deck.Rank;
 import java.util.Collections;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class Counting {
      * @param cards The hand you would like to count
      * @return The amount of 15's you get
      */
-    public static int points15(ArrayList<Card> cards){
+    public static int points15(ArrayList<CardInterface> cards){
         int count = 0;
         int setCount;
         StringBuilder set;
@@ -45,7 +45,7 @@ public class Counting {
      * @param cards the ArrayList which makes up the hand
      * @return returns the total amount of points from pairs
      */
-    public static int pointsPair(ArrayList<Card> cards){
+    public static int pointsPair(ArrayList<CardInterface> cards){
         int count = 0;
         for(int i = 0; i < cards.size(); i++)
             for(int j = i+1; j < cards.size(); j++){
@@ -60,8 +60,8 @@ public class Counting {
      * @param cards the cards you want to check for the flush
      * @return the amount of points received for the flush
      */
-    public static int flush(ArrayList<Card> cards){
-        for(Card card:cards)
+    public static int flush(ArrayList<CardInterface> cards){
+        for(CardInterface card:cards)
             if(cards.get(0).getSuit() != card.getSuit())
                 return 0;
         return cards.size();
@@ -74,8 +74,8 @@ public class Counting {
      * @param  cutCard the cut card
      * @return the point for the knob if applicable
      */
-    public static int knob(ArrayList<Card> cards, Card cutCard){
-        for(Card i:cards)
+    public static int knob(ArrayList<CardInterface> cards, CardInterface cutCard){
+        for(CardInterface i:cards)
             if(i.getSuit() == cutCard.getSuit() && i.getRank() == Rank.Jack)
                 return 1;
         return 0;
@@ -86,10 +86,10 @@ public class Counting {
      * @param cards the cards you want to check for runs
      * @return the amount of points from runs
      */
-    public static int runs(ArrayList<Card> cards){
+    public static int runs(ArrayList<CardInterface> cards){
         int count = 0;
         StringBuilder set;
-        ArrayList<Card> setCard = new ArrayList<>();
+        ArrayList<CardInterface> setCard = new ArrayList<>();
         for(int i=0; i < Math.pow(2, cards.size()); i++){
             setCard.clear();
             set = new StringBuilder(Integer.toBinaryString(i));
@@ -121,7 +121,7 @@ public class Counting {
      * @param peggedCards the cards that have been pegged thus far
      * @return the points gotten from pegging
      */
-    public static int pointsPegging(ArrayList<Card> peggedCards){
+    public static int pointsPegging(ArrayList<CardInterface> peggedCards){
         if(peggedCards.size() == 1)
             return 0;
         return points15Pegging(peggedCards) + points31Pegging(peggedCards) + pointsPairsPegging(peggedCards) + pointsRunsPegging(peggedCards);
@@ -132,9 +132,9 @@ public class Counting {
      * @param peggedCards the cards that have been pegged thus far
      * @return the points from 15's for pegging
      */
-    public static int points15Pegging(ArrayList<Card> peggedCards){
+    public static int points15Pegging(ArrayList<CardInterface> peggedCards){
         int count = 0;
-        for(Card i: peggedCards)
+        for(CardInterface i: peggedCards)
             count += i.getRank().count();
         if(count==15)
             return 2;
@@ -146,9 +146,9 @@ public class Counting {
      * @param peggedCards the cards that have been pegged thus far
      * @return a point if the player has reached 31 points (they will an additional point when the pegging resets)
      */
-    public static int points31Pegging(ArrayList<Card> peggedCards){
+    public static int points31Pegging(ArrayList<CardInterface> peggedCards){
         int count = 0;
-        for(Card i: peggedCards)
+        for(CardInterface i: peggedCards)
             count += i.getRank().count();
         if(count==31)
             return 1;
@@ -160,7 +160,7 @@ public class Counting {
      * @param peggedCards the cards that have been pegged thus far
      * @return the pegging points for pairs
      */
-    public static int pointsPairsPegging(ArrayList<Card> peggedCards){
+    public static int pointsPairsPegging(ArrayList<CardInterface> peggedCards){
         int count = 0;
         if(peggedCards.size() < 2)
             return count;
@@ -182,11 +182,11 @@ public class Counting {
      * @param peggedCards the cards that have been pegged thus far
      * @return the pegging points for runs
      */
-    public static int pointsRunsPegging(ArrayList<Card> peggedCards){
+    public static int pointsRunsPegging(ArrayList<CardInterface> peggedCards){
         int highestRun = 0;
         if(peggedCards.size() < 3)
             return highestRun;
-        ArrayList<Card> peggedCardsEditable;
+        ArrayList<CardInterface> peggedCardsEditable;
         for(int i = peggedCards.size()-3; i >= 0; i--) {
             peggedCardsEditable = new ArrayList<>(peggedCards.subList(i, peggedCards.size()));
             Collections.sort(peggedCardsEditable);

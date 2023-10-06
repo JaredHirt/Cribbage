@@ -5,12 +5,17 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package main.java.deck;
+package main.java.cribbageGUI;
+import main.java.deck.CardInterface;
+import main.java.deck.Rank;
+import main.java.deck.Suit;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 
-import main.java.cribbageGUI.CardButton;
-
-public class Card implements Comparable<CardInterface>, CardInterface{
+public class CardButton extends JButton implements Comparable<CardInterface>, CardInterface {
 
     private final Rank rank;
     private final Suit suit;
@@ -21,9 +26,17 @@ public class Card implements Comparable<CardInterface>, CardInterface{
      * @param rank = The rank of the card, a 10 of clubs would be a Ten
      * @param suit = What suit the card is, a 10 of clubs would be a Club
      */
-    public Card(Rank rank, Suit suit){
+    public CardButton(Rank rank, Suit suit){
         this.rank = rank;
         this.suit = suit;
+        ImageIcon icon = new ImageIcon("src/main/resources/CribbageGUI_Images/Cards/" + this + ".png");
+        Image image = icon.getImage();
+        image = image.getScaledInstance(100,150, 0);
+        icon.setImage(image);
+        setIcon(icon);
+        setContentAreaFilled(false);
+        setOpaque(true);
+        setBackground(Color.gray);
     }
 
     /**
@@ -43,20 +56,20 @@ public class Card implements Comparable<CardInterface>, CardInterface{
      * @param s the suit of the card
      * @return = A new card with the specified suit and rank
      */
-    public static Card getCard(Rank r, Suit s){return new Card(r, s);}
+    public static CardButton getCard(Rank r, Suit s){return new CardButton(r, s);}
     /**
      * Makes a new card with a specified suit and rank using a number between 0 and 51
      * @param i A number between 0 and 51
      * @return A card calculated with the number specified going through the suits in alphabetical order
      */
-    public static Card getCard(int i){
-        return new Card(Rank.values()[i%13], Suit.values()[i/13]);
+    public static CardButton getCard(int i){
+        return new CardButton(Rank.values()[i%13], Suit.values()[i/13]);
     }
     /**
      * Makes a new card using a string starting with the rank then the suit
      * @param i is a two character string starting with the rank, and then the suit
      */
-    public static Card getCard(String i){
+    public static CardButton getCard(String i){
         Rank rank = switch(i.charAt(0)) {
             case 'T' -> Rank.Ten;
             case 'J' -> Rank.Jack;
@@ -112,10 +125,28 @@ public class Card implements Comparable<CardInterface>, CardInterface{
         return Integer.compare(this.rank.ordinal(), a.getRank().ordinal());
     }
 
-    @Override
-    public CardButton getCardButton(){
-        return new CardButton(getRank(), getSuit());
+    public static CardButton getBlankCard(){
+        CardButton tempCard = getCard(0);
+
+        ImageIcon icon = new ImageIcon("src/main/resources/CribbageGUI_Images/Cards/Card_Back.png");
+        Image image = icon.getImage();
+        image = image.getScaledInstance(100,150, 0);
+        icon.setImage(image);
+        tempCard.setIcon(icon);
+        return tempCard;
     }
+
+    public void removeAllActionListeners(){
+        ActionListener[] listeners = this.getActionListeners();
+        for(ActionListener i: listeners)
+            removeActionListener(i);
+    }
+
+    @Override
+    public CardButton getCardButton(){return this;}
+
+
+
 
 
 }

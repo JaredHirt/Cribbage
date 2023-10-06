@@ -5,16 +5,14 @@
  * @author Jared Hirt
  * Student Number: 230154787
  */
-package game;
+package main.java.game;
 
 
-import cribbageGUI.Controller;
-import deck.Deck;
-import deck.Card;
-import deck.Rank;
-import player.Player;
-import player.AI;
-import javax.swing.*;
+import main.java.cribbageGUI.Controller;
+import main.java.deck.Deck;
+import main.java.cribbageGUI.CardButton;
+import main.java.player.Player;
+import main.java.player.AI;
 
 
 import java.util.ArrayList;
@@ -31,7 +29,7 @@ public class Game {
     private final ArrayList cardsPegged;
 
     public Game(){
-        cribbageGUI.Controller control = controller;
+        Controller control = controller;
         //Setting up the game
         theDeck = new Deck();
         player = new Player();
@@ -47,7 +45,7 @@ public class Game {
         //Finding out who the dealer is
         //Need to make a GUI for this action
         boolean dealerFound = false;
-        Card[] dealtCards;
+        CardButton[] dealtCards;
         while(!dealerFound){
             dealtCards = theDeck.returnUniqueCards(2);
             if(dealtCards[0].getRank().ordinal() < dealtCards[1].getRank().ordinal()) {
@@ -65,7 +63,7 @@ public class Game {
     }
 
     public void deal(){
-        Card[] dealtCards;
+        CardButton[] dealtCards;
         dealer.newRound();
         pone.newRound();
         cardsPegged.clear();
@@ -114,5 +112,5 @@ public class Game {
     public AI getAi(){return ai;}
     public Player getDealer(){return dealer;}
     public Player getPone(){return pone;}
-    public ArrayList<Card> getPeggedCards(){return cardsPegged;}
+    public ArrayList<CardButton> getPeggedCards(){return cardsPegged;}
 }

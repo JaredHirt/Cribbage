@@ -1,4 +1,4 @@
-package cribbageGUI;
+package main.java.cribbageGUI;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
